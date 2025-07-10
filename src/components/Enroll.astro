@@ -1,0 +1,137 @@
+---
+// Enroll component for IRCS Certification enrollment form
+---
+
+<section class="py-20 px-5 sm:py-10 sm:px-6 lg:py-20 lg:px-8 bg-white" id="enroll">
+	<div class="max-w-4xl mx-auto">
+		<!-- Section Header -->
+		<div class="text-center mb-12">
+			<h2 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+				Enroll in <span class="text-blue-600">IRCS Certification</span>
+			</h2>
+			<p class="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
+				Complete the form below to begin your enrollment process. You'll receive access to the training materials within 24 hours.
+			</p>
+		</div>
+
+		<!-- Enrollment Form -->
+		<div class="bg-gray-50 rounded-2xl p-8 lg:p-12">
+			<form class="space-y-6">
+				<!-- Name and Email Row -->
+				<div class="grid md:grid-cols-2 gap-6">
+					<div>
+						<label for="fullName" class="block text-sm font-semibold text-gray-900 mb-2">
+							Full Name
+						</label>
+						<input 
+							type="text" 
+							id="fullName" 
+							name="fullName" 
+							placeholder="Required"
+							required
+							class="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-colors"
+						>
+					</div>
+					<div>
+						<label for="email" class="block text-sm font-semibold text-gray-900 mb-2">
+							Email Address
+						</label>
+						<input 
+							type="email" 
+							id="email" 
+							name="email" 
+							placeholder="Required"
+							required
+							class="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-colors"
+						>
+					</div>
+				</div>
+
+				<!-- Phone and Organization Row -->
+				<div class="grid md:grid-cols-2 gap-6">
+					<div>
+						<label for="phone" class="block text-sm font-semibold text-gray-900 mb-2">
+							Phone Number
+						</label>
+						<input 
+							type="tel" 
+							id="phone" 
+							name="phone" 
+							placeholder="Required"
+							required
+							class="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-colors"
+						>
+					</div>
+					<div>
+						<label for="organization" class="block text-sm font-semibold text-gray-900 mb-2">
+							Organization/Company
+						</label>
+						<input 
+							type="text" 
+							id="organization" 
+							name="organization" 
+							placeholder="Optional"
+							class="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-colors"
+						>
+					</div>
+				</div>
+
+				<!-- Job Title -->
+				<div>
+					<label for="jobTitle" class="block text-sm font-semibold text-gray-900 mb-2">
+						Job Title
+					</label>
+					<input 
+						type="text" 
+						id="jobTitle" 
+						name="jobTitle" 
+						placeholder="Optional"
+						class="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-colors"
+					>
+				</div>
+
+				<!-- Payment Information -->
+				<div>
+					<label for="payment" class="block text-sm font-semibold text-gray-900 mb-2">
+						Payment Information
+					</label>
+					<input 
+						type="text" 
+						id="payment" 
+						name="payment" 
+						placeholder="Required"
+						required
+						class="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-colors"
+					>
+				</div>
+
+				<!-- Enrollment Summary -->
+				<div class="bg-white rounded-xl p-6 border border-gray-200">
+					<h3 class="text-lg font-bold text-gray-900 mb-4 text-center">Enrollment Summary</h3>
+					
+					<div class="flex justify-between items-center mb-4">
+						<span class="text-gray-700">IRCS Certification Program</span>
+						<span class="text-2xl font-bold text-blue-600">$495</span>
+					</div>
+					
+					<div class="text-center text-sm text-gray-600 mb-6">
+						<p>Secure payment processing • Valid for 2 years • 30-day money-back guarantee</p>
+					</div>
+					
+					<!-- Submit Button -->
+					<button 
+						type="submit"
+						class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-4 px-8 rounded-full transition-colors text-lg"
+					>
+						Complete Enrollment
+					</button>
+				</div>
+
+				<!-- Terms and Privacy -->
+				<div class="text-center text-sm text-gray-600">
+					<p>By enrolling, you agree to our <a href="#" class="text-blue-600 hover:text-blue-700">terms of service</a> and <a href="#" class="text-blue-600 hover:text-blue-700">privacy policy</a></p>
+				</div>
+			</form>
+		</div>
+	</div>
+</section>
