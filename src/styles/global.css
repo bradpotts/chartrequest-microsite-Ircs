@@ -1,1 +1,86 @@
+/* Import the Inter font from Google Fonts */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
+
+/* Tailwind CSS v4 directive */
 @import "tailwindcss";
+
+/* Base styles */
+html {
+  scroll-behavior: smooth;
+  font-family: var(--fonts-sans);
+}
+
+body {
+  color: var(--colors-gray-800);
+  background-color: var(--colors-bg-white);
+  line-height: 1.5;
+}
+
+/* Custom styles */
+.btn-primary {
+  background-color: var(--colors-primary);
+  color: white;
+  font-weight: 500;
+  padding: 0.5rem 1.5rem;
+  border-radius: 9999px;
+  transition: all 0.2s ease;
+}
+
+.btn-primary:hover {
+  filter: brightness(0.9);
+}
+
+.btn-outline {
+  border: 1px solid var(--colors-primary);
+  color: var(--colors-primary);
+  font-weight: 500;
+  padding: 0.5rem 1.5rem;
+  border-radius: 9999px;
+  transition: all 0.2s ease;
+}
+
+.btn-outline:hover {
+  background-color: var(--colors-bg-blue);
+}
+
+.card-modern {
+  background-color: white;
+  border-radius: var(--radii-modern);
+  box-shadow: var(--shadows-modern);
+  padding: 1.5rem;
+  transition: all 0.2s ease;
+}
+
+.card-modern:hover {
+  box-shadow: var(--shadows-modern-md);
+}
+
+.section-title {
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+@media (min-width: 768px) {
+  .section-title {
+    font-size: 2.25rem;
+    line-height: 2.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .section-title {
+    font-size: 3rem;
+    line-height: 1;
+  }
+}
+
+.section-subtitle {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  color: var(--colors-gray-600);
+  max-width: 48rem;
+  margin-left: auto;
+  margin-right: auto;
+}
