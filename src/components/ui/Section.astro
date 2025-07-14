@@ -1,0 +1,42 @@
+---
+/**
+ * Modern Section Component for consistent spacing
+ */
+interface Props {
+  id?: string;
+  background?: 'white' | 'light' | 'primary' | 'gradient';
+  paddingY?: 'small' | 'medium' | 'large' | 'none';
+  class?: string;
+}
+
+const { 
+  id,
+  background = 'white', 
+  paddingY = 'large',
+  class: className = '' 
+} = Astro.props;
+
+// Background styles
+const backgroundStyles = {
+  white: 'bg-white',
+  light: 'bg-gray-50',
+  primary: 'bg-primary text-white',
+  gradient: 'bg-gradient-to-br from-blue-50 to-indigo-100'
+};
+
+// Padding styles
+const paddingStyles = {
+  none: '',
+  small: 'py-5 sm:py-10',
+  medium: 'py-10 sm:py-16',
+  large: 'py-16 sm:py-20 lg:py-24'
+};
+
+const styles = `px-5 sm:px-6 lg:px-8 ${paddingStyles[paddingY]} ${backgroundStyles[background]} ${className}`;
+---
+
+<section id={id} class={styles}>
+  <div class="max-w-7xl mx-auto">
+    <slot />
+  </div>
+</section>

@@ -1,0 +1,35 @@
+---
+/**
+ * Modern Heading Component
+ */
+interface Props {
+  level?: '1' | '2' | '3' | '4' | '5' | '6';
+  size?: 'xl' | 'lg' | 'md' | 'sm';
+  class?: string;
+}
+
+const { 
+  level = '2',
+  size = 'lg', 
+  class: className = '' 
+} = Astro.props;
+
+// Map size to specific Tailwind classes
+const sizeStyles = {
+  xl: 'text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight tracking-tight',
+  lg: 'text-3xl lg:text-4xl font-bold leading-tight tracking-tight',
+  md: 'text-2xl lg:text-3xl font-semibold leading-snug',
+  sm: 'text-xl font-semibold leading-snug'
+};
+
+const styles = `${sizeStyles[size]} text-gray-900 ${className}`;
+
+// Use a dynamic tag approach
+---
+
+{level === '1' && <h1 class={styles}><slot /></h1>}
+{level === '2' && <h2 class={styles}><slot /></h2>}
+{level === '3' && <h3 class={styles}><slot /></h3>}
+{level === '4' && <h4 class={styles}><slot /></h4>}
+{level === '5' && <h5 class={styles}><slot /></h5>}
+{level === '6' && <h6 class={styles}><slot /></h6>}

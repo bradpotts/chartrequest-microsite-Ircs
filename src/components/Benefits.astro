@@ -1,18 +1,21 @@
 ---
 // Benefits component for IRCS certification usage and benefits
+import Section from './ui/Section.astro';
+import Heading from './ui/Heading.astro';
+import Card from './ui/Card.astro';
+import InfoBoxHorizontal from './ui/InfoBoxHorizontal.astro';
 ---
 
-<section class="py-20 px-5 sm:py-10 sm:px-6 lg:py-20 lg:px-8 bg-gray-50" id="benefits">
-	<div class="max-w-7xl mx-auto">
-		<!-- Section Header -->
-		<div class="text-center mb-16">
-			<h2 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
-				How You Can Use Your <span class="text-blue-600">IRCS Certification</span>
-			</h2>
-			<p class="text-lg text-gray-600 max-w-4xl mx-auto leading-relaxed">
-				Unlock new opportunities and advance your career with industry-recognized expertise
-			</p>
-		</div>
+<Section background="light" id="benefits">
+	<!-- Section Header -->
+	<div class="text-center mb-16">
+		<Heading level="2" size="lg">
+			How You Can Use Your <span class="text-primary">IRCS Certification</span>
+		</Heading>
+		<p class="text-lg text-gray-600 max-w-4xl mx-auto mt-4 leading-relaxed">
+			Unlock new opportunities and advance your career with industry-recognized expertise
+		</p>
+	</div>
 
 		<div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
 			<!-- Left Content - Benefits List -->
@@ -104,5 +107,4 @@
 				</div>
 			</div>
 		</div>
-	</div>
-</section>
+</Section>

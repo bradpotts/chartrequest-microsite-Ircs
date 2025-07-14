@@ -1,0 +1,77 @@
+---
+/**
+ * InfoBox Component - A clean, modern stat/info box without heavy shadows
+ */
+interface Props {
+  icon?: string;
+  title: string;
+  value?: string;
+  color?: 'primary' | 'blue' | 'green' | 'amber' | 'purple' | 'gray';
+  bgColor?: 'white' | 'light' | 'blue' | 'green' | 'amber' | 'purple' | 'gray';
+  class?: string;
+}
+
+const { 
+  icon,
+  title, 
+  value,
+  color = 'primary',
+  bgColor = 'white',
+  class: className = ''
+} = Astro.props;
+
+// Color variants for icons
+const iconColors = {
+  primary: 'text-primary',
+  blue: 'text-blue-600',
+  green: 'text-green-600',
+  amber: 'text-amber-500',
+  purple: 'text-purple-600',
+  gray: 'text-gray-600',
+};
+
+// Background color variants
+const bgColors = {
+  white: 'bg-white',
+  light: 'bg-gray-50',
+  blue: 'bg-blue-50',
+  green: 'bg-green-50',
+  amber: 'bg-amber-50',
+  purple: 'bg-purple-50',
+  gray: 'bg-gray-50',
+};
+
+// Border color variants - just slightly darker than the background
+const borderColors = {
+  white: 'border-gray-200',
+  light: 'border-gray-200',
+  blue: 'border-blue-200/70',
+  green: 'border-green-200/70',
+  amber: 'border-amber-200/70',
+  purple: 'border-purple-200/70',
+  gray: 'border-gray-200',
+};
+
+// Hover state - subtle transitions
+const hoverEffects = {
+  white: 'hover:border-gray-300 hover:bg-gray-50/50',
+  light: 'hover:border-gray-300 hover:bg-gray-100/50',
+  blue: 'hover:border-blue-300/50 hover:bg-blue-50/70',
+  green: 'hover:border-green-300/50 hover:bg-green-50/70',
+  amber: 'hover:border-amber-300/50 hover:bg-amber-50/70',
+  purple: 'hover:border-purple-300/50 hover:bg-purple-50/70',
+  gray: 'hover:border-gray-300 hover:bg-gray-100/50',
+};
+
+const styles = `${bgColors[bgColor]} ${borderColors[bgColor]} ${hoverEffects[bgColor]} border rounded-xl p-6 flex flex-col items-center text-center transition-all duration-300 ${className}`;
+---
+
+<div class={styles}>
+  {icon && (
+    <div class={`${iconColors[color]} mb-3 opacity-90`}>
+      <Fragment set:html={icon} />
+    </div>
+  )}
+  {value && <div class="text-3xl font-bold text-gray-900 mb-1">{value}</div>}
+  <div class="text-gray-600 font-medium">{title}</div>
+</div>

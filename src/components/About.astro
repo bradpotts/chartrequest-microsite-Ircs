@@ -1,102 +1,117 @@
 ---
 // About component for IRCS Certification details
+import Section from './ui/Section.astro';
+import Heading from './ui/Heading.astro';
+import InfoBoxHorizontal from './ui/InfoBoxHorizontal.astro';
+import InfoBox from './ui/InfoBox.astro';
+import ColoredIcon from './ui/ColoredIcon.astro';
+import Card from './ui/Card.astro';
+
+// Icons as SVG strings
+const shieldIcon = `<img src="/images/ircs-icon-whats-ircs.svg" alt="Shield" class="w-6 h-6" />`;
+const bookIcon = `<img src="/images/ircs-icon-what-youll-learn.svg" alt="Book Reader" class="w-6 h-6" />`;
+const checkIcon = `<img src="/images/ircs-icon-what-youll-learn-checkmarks.svg" alt="Checkmark" class="w-5 h-5" />`;
+const certIcon = `<img src="/images/ircs-icon-ircs-certification.svg" alt="Certificate" class="w-12 h-12" />`;
+
+// Learning items
+const learningItems = [
+  "HIPAA compliance fundamentals for information release",
+  "State-specific regulations for health information management",
+  "Best practices for secure record retrieval and release",
+  "Documentation requirements and compliance auditing",
+  "Risk management for protected health information"
+];
 ---
 
-<section class="py-20 px-5 sm:py-10 sm:px-6 lg:py-20 lg:px-8 bg-gray-50" id="about">
-	<div class="max-w-7xl mx-auto">
-		<!-- Section Header -->
-		<div class="text-center mb-16">
-			<h2 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
-				About the <span class="text-blue-600">IRCS Certification</span>
-			</h2>
-			<p class="text-lg text-gray-600 max-w-4xl mx-auto leading-relaxed">
-				Professional credential that validates your expertise in managing protected health information in accordance with HIPAA regulations and state laws.
-			</p>
-		</div>
+<Section background="light" id="about">
+  <!-- Section Header -->
+  <div class="text-center mb-16">
+    <Heading level="2" size="lg">
+      About the <span class="text-blue-600">IRCS Certification</span>
+    </Heading>
+    <p class="text-lg text-gray-600 max-w-4xl mx-auto leading-relaxed">
+      Professional credential that validates your expertise in managing protected health information in accordance with HIPAA regulations and state laws.
+    </p>
+  </div>
 
-		<!-- Main Content Grid -->
-		<div class="grid lg:grid-cols-3 gap-8">
-			<!-- Left Column - What is IRCS -->
-			<div class="lg:col-span-1">
-				<div class="bg-blue-50 rounded-2xl p-8 mb-8">
-					<div class="flex items-center mb-6">
-						<div class="w-12 h-12 bg-blue-600 rounded-xl flex items-center justify-center mr-4">
-							<img src="/images/ircs-icon-whats-ircs.svg" alt="Shield" class="w-6 h-6 text-white" />
-						</div>
-						<h3 class="text-2xl font-bold text-gray-900">What is IRCS?</h3>
-					</div>
-					<p class="text-gray-700 leading-relaxed">
-						The Information Release and Compliance Specialist (IRCS) certification is a professional credential that validates your expertise in managing protected health information in accordance with HIPAA regulations and state laws.
-					</p>
-				</div>
+  <!-- Main Content Grid -->
+  <div class="grid lg:grid-cols-2 gap-8">
+    <!-- Left Column - What is IRCS -->
+    <div class="space-y-8">
+      <!-- What is IRCS InfoBox -->
+      <InfoBoxHorizontal
+        icon={shieldIcon}
+        title="What is IRCS?"
+        color="blue"
+        bgColor="blue"
+        accent="blue"
+      >
+        <p class="text-gray-700 leading-relaxed mt-4">
+          The Information Release and Compliance Specialist (IRCS) certification is a professional credential that validates your expertise in managing protected health information in accordance with HIPAA regulations and state laws.
+        </p>
+      </InfoBoxHorizontal>
 
-				<!-- What You'll Learn -->
-				<div class="bg-green-50 rounded-2xl p-8">
-					<div class="flex items-center mb-6">
-						<div class="w-12 h-12 bg-green-600 rounded-xl flex items-center justify-center mr-4">
-							<img src="/images/ircs-icon-what-youll-learn.svg" alt="Book Reader" class="w-6 h-6 text-white" />
-						</div>
-						<h3 class="text-2xl font-bold text-gray-900">What You'll Learn</h3>
-					</div>
-					<div class="space-y-4">
-						<div class="flex items-start">
-							<img src="/images/ircs-icon-what-youll-learn-checkmarks.svg" alt="Checkmark" class="w-5 h-5 text-green-600 mt-1 mr-3 flex-shrink-0" />
-							<span class="text-gray-700">HIPAA compliance fundamentals for information release</span>
-						</div>
-						<div class="flex items-start">
-							<img src="/images/ircs-icon-what-youll-learn-checkmarks.svg" alt="Checkmark" class="w-5 h-5 text-green-600 mt-1 mr-3 flex-shrink-0" />
-							<span class="text-gray-700">State-specific regulations for health information management</span>
-						</div>
-						<div class="flex items-start">
-							<img src="/images/ircs-icon-what-youll-learn-checkmarks.svg" alt="Checkmark" class="w-5 h-5 text-green-600 mt-1 mr-3 flex-shrink-0" />
-							<span class="text-gray-700">Best practices for secure record retrieval and release</span>
-						</div>
-						<div class="flex items-start">
-							<img src="/images/ircs-icon-what-youll-learn-checkmarks.svg" alt="Checkmark" class="w-5 h-5 text-green-600 mt-1 mr-3 flex-shrink-0" />
-							<span class="text-gray-700">Documentation requirements and compliance auditing</span>
-						</div>
-						<div class="flex items-start">
-							<img src="/images/ircs-icon-what-youll-learn-checkmarks.svg" alt="Checkmark" class="w-5 h-5 text-green-600 mt-1 mr-3 flex-shrink-0" />
-							<span class="text-gray-700">Risk management for protected health information</span>
-						</div>
-					</div>
-				</div>
-			</div>
+      <!-- What You'll Learn InfoBox -->
+      <InfoBoxHorizontal
+        icon={bookIcon}
+        title="What You'll Learn"
+        color="green"
+        bgColor="green"
+        accent="green"
+      >
+        <div class="space-y-4 mt-4">
+          {learningItems.map(item => (
+            <div class="flex items-start">
+              <span class="text-green-600 mt-1 mr-3 flex-shrink-0">
+                <Fragment set:html={checkIcon} />
+              </span>
+              <span class="text-gray-700">{item}</span>
+            </div>
+          ))}
+        </div>
+      </InfoBoxHorizontal>
+    </div>
 
-			<!-- Right Column - Certification Details -->
-			<div class="lg:col-span-2">
-				<div class="bg-white rounded-2xl p-8 shadow-lg">
-					<!-- Certification Badge -->
-					<div class="text-center mb-8">
-						<div class="w-24 h-24 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-6">
-							<img src="/images/ircs-icon-ircs-certification.svg" alt="Certificate" class="w-12 h-12 text-white" />
-						</div>
-						<h3 class="text-3xl font-bold text-gray-900 mb-2">IRCS Certification</h3>
-						<p class="text-blue-600 font-semibold text-lg">Valid for 2 years</p>
-					</div>
+    <!-- Right Column - Certification Details -->
+    <div>
+      <Card color="white" class="p-8">
+        <!-- Certification Badge -->
+        <div class="text-center mb-8">
+          <div class="mx-auto mb-6">
+            <ColoredIcon color="blue" size="lg" rounded="full" class="mx-auto">
+              <Fragment set:html={certIcon} />
+            </ColoredIcon>
+          </div>
+          <Heading level="3" size="md" class="mb-2">IRCS Certification</Heading>
+          <p class="text-blue-600 font-semibold text-lg">Valid for 2 years</p>
+        </div>
 
-					<!-- Description -->
-					<p class="text-center text-gray-600 mb-8 text-lg leading-relaxed">
-						Upon successful completion, you'll receive a professional certification recognized throughout the healthcare industry.
-					</p>
+        <!-- Description -->
+        <p class="text-center text-gray-600 mb-8 text-lg leading-relaxed">
+          Upon successful completion, you'll receive a professional certification recognized throughout the healthcare industry.
+        </p>
 
-					<!-- Certification Details -->
-					<div class="grid md:grid-cols-3 gap-6">
-						<div class="text-center p-6 bg-gray-50 rounded-xl">
-							<h4 class="font-semibold text-gray-900 mb-2">Duration</h4>
-							<p class="text-gray-600">2-4 hours</p>
-						</div>
-						<div class="text-center p-6 bg-gray-50 rounded-xl">
-							<h4 class="font-semibold text-gray-900 mb-2">Format</h4>
-							<p class="text-gray-600">Online</p>
-						</div>
-						<div class="text-center p-6 bg-gray-50 rounded-xl">
-							<h4 class="font-semibold text-gray-900 mb-2">Pass Rate</h4>
-							<p class="text-gray-600">70% required</p>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</section>
+        <!-- Certification Details -->
+        <div class="grid md:grid-cols-3 gap-6">
+          <InfoBox 
+            title="Duration"
+            value="2-4 hours"
+            color="blue"
+            bgColor="blue"
+          />
+          <InfoBox 
+            title="Format"
+            value="Online"
+            color="green"
+            bgColor="green"
+          />
+          <InfoBox 
+            title="Pass Rate"
+            value="70%"
+            color="amber"
+            bgColor="amber"
+          />
+        </div>
+      </Card>
+  </div>
+</Section>

@@ -1,0 +1,41 @@
+---
+/**
+ * Modern Button Component
+ */
+interface Props {
+  variant?: 'primary' | 'outline';
+  href?: string;
+  type?: 'button' | 'submit' | 'reset';
+  class?: string;
+}
+
+const { 
+  variant = 'primary', 
+  href, 
+  type = 'button',
+  class: className = '' 
+} = Astro.props;
+
+// Base styles shared by all variants
+const baseStyles = 'inline-block py-2.5 px-7 rounded-xl font-medium transition-all duration-200 relative overflow-hidden';
+
+// Variant specific styles
+const variantStyles = {
+  primary: 'bg-primary text-white shadow-sm border border-transparent hover:shadow-lg hover:-translate-y-0.5',
+  outline: 'border border-primary text-primary bg-transparent hover:bg-bg-blue hover:-translate-y-0.5 hover:shadow-sm'
+};
+
+const styles = `${baseStyles} ${variantStyles[variant]} ${className}`;
+---
+
+{
+  href ? (
+    <a href={href} class={styles}>
+      <slot />
+    </a>
+  ) : (
+    <button type={type} class={styles}>
+      <slot />
+    </button>
+  )
+}

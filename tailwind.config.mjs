@@ -89,13 +89,15 @@ export default {
   // Font settings using the new tokens approach
   fonts: {
     sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+    heading: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+    body: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
   },
-  // Shadow tokens
+  // Shadow tokens - updated for 2025 design trends with subtler, more contemporary effects
   shadows: {
-    'modern-sm': '0 1px 2px 0 rgba(0, 0, 0, 0.05), 0 1px 3px 0 rgba(0, 0, 0, 0.1)',
-    'modern': '0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03)',
-    'modern-md': '0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.025)',
-    'modern-lg': '0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.02)',
+    'modern-sm': '0 1px 2px 0 rgba(0, 0, 0, 0.03), 0 1px 3px 0 rgba(0, 0, 0, 0.02)',
+    'modern': '0 2px 8px -2px rgba(17, 24, 39, 0.04), 0 4px 12px -4px rgba(17, 24, 39, 0.03)',
+    'modern-md': '0 12px 16px -8px rgba(17, 24, 39, 0.04), 0 4px 12px -8px rgba(17, 24, 39, 0.03)',
+    'modern-lg': '0 24px 32px -12px rgba(17, 24, 39, 0.04), 0 12px 24px -12px rgba(17, 24, 39, 0.03)',
   },
   // Radius tokens
   radii: {

@@ -1,33 +1,35 @@
 ---
 // WhoShouldGetCertified component for IRCS target audience
+import Section from './ui/Section.astro';
+import Heading from './ui/Heading.astro';
+import Card from './ui/Card.astro';
 ---
 
-<section class="py-20 px-5 sm:py-10 sm:px-6 lg:py-20 lg:px-8 bg-white" id="who-should-enroll">
-	<div class="max-w-7xl mx-auto">
-		<!-- Section Header -->
-		<div class="text-center mb-16">
-			<h2 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
-				Who Should Get <span class="text-blue-600">Certified?</span>
-			</h2>
-			<p class="text-lg text-gray-600 max-w-4xl mx-auto leading-relaxed">
-				The IRCS certification is designed for healthcare professionals who manage or handle protected health information as part of their daily responsibilities.
-			</p>
-		</div>
+<Section background="white" id="who-should-enroll">
+	<!-- Section Header -->
+	<div class="text-center mb-16">
+		<Heading level="2" size="lg">
+			Who Should Get <span class="text-primary">Certified?</span>
+		</Heading>
+		<p class="text-lg text-gray-600 max-w-4xl mx-auto mt-4 leading-relaxed">
+			The IRCS certification is designed for healthcare professionals who manage or handle protected health information as part of their daily responsibilities.
+		</p>
+	</div>
 
-		<!-- Primary Roles Grid -->
-		<div class="grid md:grid-cols-3 gap-8 mb-16">
-			<!-- ROI Specialists -->
-			<div class="bg-white rounded-2xl p-8 shadow-lg border border-gray-100 text-center">
-				<div class="w-16 h-16 bg-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
-					<svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
-						<path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-					</svg>
-				</div>
-				<h3 class="text-xl font-bold text-gray-900 mb-4">ROI Specialists</h3>
-				<p class="text-gray-600 leading-relaxed">
-					Staff dedicated to handling medical record requests and releases
-				</p>
+	<!-- Primary Roles Grid -->
+	<div class="grid md:grid-cols-3 gap-8 mb-16">
+		<!-- ROI Specialists -->
+		<Card class="text-center">
+			<div class="w-16 h-16 bg-primary rounded-xl flex items-center justify-center mx-auto mb-6">
+				<svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+					<path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+				</svg>
 			</div>
+			<Heading level="3" size="sm" class="mb-4">ROI Specialists</Heading>
+			<p class="text-gray-600 leading-relaxed">
+				Staff dedicated to handling medical record requests and releases
+			</p>
+		</Card>
 
 			<!-- HIM Professionals -->
 			<div class="bg-white rounded-2xl p-8 shadow-lg border border-gray-100 text-center">
@@ -101,5 +103,4 @@
 				</div>
 			</div>
 		</div>
-	</div>
-</section>
+</Section>

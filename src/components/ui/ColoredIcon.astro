@@ -1,0 +1,50 @@
+---
+/**
+ * ColoredIcon Component - A flexible icon container with color options
+ */
+interface Props {
+  color?: 'primary' | 'blue' | 'green' | 'amber' | 'purple' | 'gray';
+  size?: 'sm' | 'md' | 'lg';
+  rounded?: 'full' | 'xl' | '2xl';
+  icon?: string;
+  class?: string;
+}
+
+const { 
+  color = 'primary',
+  size = 'md',
+  rounded = 'xl',
+  icon,
+  class: className = ''
+} = Astro.props;
+
+// Color variants
+const colorVariants = {
+  primary: 'bg-primary text-white',
+  blue: 'bg-blue-600 text-white',
+  green: 'bg-green-600 text-white',
+  amber: 'bg-amber-500 text-white',
+  purple: 'bg-purple-600 text-white',
+  gray: 'bg-gray-600 text-white',
+};
+
+// Size variants
+const sizeVariants = {
+  sm: 'w-10 h-10',
+  md: 'w-12 h-12',
+  lg: 'w-16 h-16',
+};
+
+// Rounded variants
+const roundedVariants = {
+  full: 'rounded-full',
+  xl: 'rounded-xl',
+  '2xl': 'rounded-2xl',
+};
+
+const styles = `${colorVariants[color]} ${sizeVariants[size]} ${roundedVariants[rounded]} flex items-center justify-center ${className}`;
+---
+
+<div class={styles}>
+  {icon ? <Fragment set:html={icon} /> : <slot />}
+</div>

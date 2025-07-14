@@ -1,33 +1,79 @@
 ---
 // Certification Cost and Enrollment Details component for IRCS
+import Section from './ui/Section.astro';
+import Heading from './ui/Heading.astro';
+import InfoBox from './ui/InfoBox.astro';
+import InfoBoxHorizontal from './ui/InfoBoxHorizontal.astro';
+import InfoBoxMinimal from './ui/InfoBoxMinimal.astro';
+import Button from './ui/Button.astro';
+
+// Icons
+const clockIcon = `<svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+</svg>`;
+
+const priceIcon = `<svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+</svg>`;
+
+const calendarIcon = `<svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+</svg>`;
+
+const certificateIcon = `<svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+</svg>`;
 ---
 
-<section class="py-20 px-5 sm:py-10 sm:px-6 lg:py-20 lg:px-8 bg-slate-50" id="costs">
-  <div class="max-w-6xl mx-auto">
-    <!-- Section Header -->
-    <div class="text-center mb-12">
-      <h2 class="text-4xl md:text-5xl font-bold text-center mb-4">
-        Certification Cost and <span class="text-blue-600">Enrollment Details</span>
-      </h2>
-      <p class="text-lg text-gray-600 max-w-3xl mx-auto">
-        Everything you need to get certified in one comprehensive package
-      </p>
+<Section background="light" id="costs">
+  <!-- Section Header -->
+  <div class="text-center mb-12">
+    <Heading level="2" size="lg">
+      Certification Cost and <span class="text-primary">Enrollment Details</span>
+    </Heading>
+    <p class="text-lg text-gray-600 max-w-3xl mx-auto mt-4">
+      Everything you need to get certified in one comprehensive package
+    </p>
+  </div>
+
+  <!-- Program Stats -->
+  <div class="grid md:grid-cols-4 gap-6 mb-12">
+    <InfoBoxMinimal
+      icon={priceIcon}
+      value="$495"
+      title="One-time Cost"
+    />
+    <InfoBoxMinimal
+      icon={clockIcon}
+      value="8-10 hrs"
+      title="Course Duration"
+    />
+    <InfoBoxMinimal
+      icon={calendarIcon}
+      value="12 mo"
+      title="Access Period"
+    />
+    <InfoBoxMinimal
+      icon={certificateIcon}
+      value="Lifetime"
+      title="Certification"
+    />
+  </div>
+
+  <!-- Main Content -->
+  <div class="max-w-4xl mx-auto bg-white rounded-xl border border-gray-100 overflow-hidden mb-12">
+    <!-- Program Header -->
+    <div class="bg-primary text-white py-4 px-6 text-center">
+      <h3 class="text-xl font-semibold">IRCS Certification Program</h3>
     </div>
 
-    <!-- Main Content -->
-    <div class="max-w-4xl mx-auto bg-white rounded-2xl shadow-sm overflow-hidden mb-12">
-      <!-- Program Header -->
-      <div class="bg-blue-600 text-white py-4 px-6 text-center">
-        <h3 class="text-xl font-semibold">IRCS Certification Program</h3>
-      </div>
-
-      <!-- Program Details -->
-      <div class="p-8">
-        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
-          <div>
-            <div class="text-sm text-gray-500 mb-1">One-time Cost</div>
-            <div class="text-4xl font-bold">$495</div>
-          </div>
+    <!-- Program Details -->
+    <div class="p-8">
+      <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
+        <div>
+          <div class="text-sm text-gray-500 mb-1">One-time Cost</div>
+          <div class="text-4xl font-bold">$495</div>
+        </div>
           <div class="mt-3 md:mt-0 bg-blue-100 text-blue-800 px-4 py-1 rounded-full text-sm font-medium">
             Valid for 2 years upon completion
           </div>
@@ -163,4 +209,4 @@
       </div>
     </div>
   </div>
-</section>
+</Section>

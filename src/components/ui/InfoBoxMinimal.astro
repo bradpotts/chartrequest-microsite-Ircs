@@ -1,0 +1,44 @@
+---
+/**
+ * InfoBox Minimal - Super clean with no borders
+ */
+interface Props {
+  icon?: string;
+  title: string;
+  value?: string;
+  description?: string;
+  color?: 'primary' | 'blue' | 'green' | 'amber' | 'purple' | 'gray';
+  class?: string;
+}
+
+const { 
+  icon,
+  title,
+  value,
+  description,
+  color = 'primary',
+  class: className = ''
+} = Astro.props;
+
+// Color variants for icons
+const iconColors = {
+  primary: 'text-primary',
+  blue: 'text-blue-600',
+  green: 'text-green-600',
+  amber: 'text-amber-500',
+  purple: 'text-purple-600',
+  gray: 'text-gray-600',
+};
+
+---
+
+<div class={`p-4 flex flex-col items-center text-center transition-all duration-300 ${className}`}>
+  {icon && (
+    <div class={`${iconColors[color]} mb-3`}>
+      <Fragment set:html={icon} />
+    </div>
+  )}
+  {value && <div class="text-4xl font-bold text-gray-900 mb-1">{value}</div>}
+  <div class="text-sm uppercase tracking-wider font-medium text-gray-500">{title}</div>
+  {description && <p class="text-gray-600 mt-2 text-sm">{description}</p>}
+</div>

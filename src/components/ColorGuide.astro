@@ -1,0 +1,251 @@
+---
+/**
+ * Color Guide component - A showcase of all available color variants for InfoBox components
+ */
+import Section from './ui/Section.astro';
+import Heading from './ui/Heading.astro';
+import InfoBox from './ui/InfoBox.astro';
+import InfoBoxHorizontal from './ui/InfoBoxHorizontal.astro';
+import InfoBoxMinimal from './ui/InfoBoxMinimal.astro';
+import ColoredIcon from './ui/ColoredIcon.astro';
+
+// Sample icons
+const circleIcon = `<svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+</svg>`;
+
+type ColorOption = 'primary' | 'blue' | 'green' | 'amber' | 'purple' | 'gray';
+type BgColorOption = 'white' | 'light' | 'blue' | 'green' | 'amber' | 'purple' | 'gray';
+
+const colors: ColorOption[] = ['primary', 'blue', 'green', 'amber', 'purple', 'gray'];
+const bgColors: BgColorOption[] = ['blue', 'green', 'amber', 'purple', 'gray', 'light'];
+---
+
+<Section background="light" id="color-guide">
+  <div class="text-center mb-12">
+    <Heading level="2" size="lg">
+      InfoBox <span class="text-primary">Color Options</span>
+    </Heading>
+    <p class="text-lg text-gray-600 max-w-3xl mx-auto mt-4">
+      A showcase of all color variants available for our InfoBox components
+    </p>
+  </div>
+
+  <!-- InfoBox Components -->
+  <div class="mb-16">
+    <Heading level="3" size="md" class="mb-6">Standard InfoBox Colors</Heading>
+    <div class="grid md:grid-cols-3 gap-6 mb-12">
+      <InfoBox
+        icon={circleIcon}
+        title="Primary Color"
+        value="InfoBox"
+        color="primary"
+        bgColor="light"
+      />
+      <InfoBox
+        icon={circleIcon}
+        title="Blue Color"
+        value="InfoBox"
+        color="blue"
+        bgColor="blue"
+      />
+      <InfoBox
+        icon={circleIcon}
+        title="Green Color"
+        value="InfoBox"
+        color="green"
+        bgColor="green"
+      />
+      <InfoBox
+        icon={circleIcon}
+        title="Amber Color"
+        value="InfoBox"
+        color="amber"
+        bgColor="amber"
+      />
+      <InfoBox
+        icon={circleIcon}
+        title="Purple Color"
+        value="InfoBox"
+        color="purple"
+        bgColor="purple"
+      />
+      <InfoBox
+        icon={circleIcon}
+        title="Gray Color"
+        value="InfoBox"
+        color="gray"
+        bgColor="gray"
+      />
+    </div>
+  </div>
+
+  <!-- InfoBoxHorizontal Components -->
+  <div class="mb-16">
+    <Heading level="3" size="md" class="mb-6">Horizontal InfoBox Colors</Heading>
+    <div class="grid md:grid-cols-2 gap-6 mb-12">
+      <InfoBoxHorizontal
+        icon={circleIcon}
+        title="Primary Color"
+        value="InfoBoxHorizontal"
+        accent="primary"
+        color="primary"
+        bgColor="light"
+      />
+      <InfoBoxHorizontal
+        icon={circleIcon}
+        title="Blue Color"
+        value="InfoBoxHorizontal"
+        accent="blue"
+        color="blue"
+        bgColor="blue"
+      />
+      <InfoBoxHorizontal
+        icon={circleIcon}
+        title="Green Color"
+        value="InfoBoxHorizontal"
+        accent="green"
+        color="green"
+        bgColor="green"
+      />
+      <InfoBoxHorizontal
+        icon={circleIcon}
+        title="Amber Color"
+        value="InfoBoxHorizontal"
+        accent="amber"
+        color="amber"
+        bgColor="amber"
+      />
+      <InfoBoxHorizontal
+        icon={circleIcon}
+        title="Purple Color"
+        value="InfoBoxHorizontal"
+        accent="purple"
+        color="purple"
+        bgColor="purple"
+      />
+      <InfoBoxHorizontal
+        icon={circleIcon}
+        title="Gray Color"
+        value="InfoBoxHorizontal"
+        accent="gray"
+        color="gray"
+        bgColor="gray"
+      />
+    </div>
+  </div>
+
+  <!-- InfoBoxMinimal Components -->
+  <div class="mb-16">
+    <Heading level="3" size="md" class="mb-6">Minimal InfoBox Colors</Heading>
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 mb-12">
+      <InfoBoxMinimal
+        icon={circleIcon}
+        title="primary"
+        value="Minimal"
+        color="primary"
+      />
+      <InfoBoxMinimal
+        icon={circleIcon}
+        title="blue"
+        value="Minimal"
+        color="blue"
+      />
+      <InfoBoxMinimal
+        icon={circleIcon}
+        title="green"
+        value="Minimal"
+        color="green"
+      />
+      <InfoBoxMinimal
+        icon={circleIcon}
+        title="amber"
+        value="Minimal"
+        color="amber"
+      />
+      <InfoBoxMinimal
+        icon={circleIcon}
+        title="purple"
+        value="Minimal"
+        color="purple"
+      />
+      <InfoBoxMinimal
+        icon={circleIcon}
+        title="gray"
+        value="Minimal"
+        color="gray"
+      />
+    </div>
+  </div>
+
+  <!-- ColoredIcon Components -->
+  <div class="mb-16">
+    <Heading level="3" size="md" class="mb-6">Icon Color Options</Heading>
+    <div class="flex flex-wrap gap-6 justify-center mb-12">
+      <ColoredIcon color="primary" size="lg" rounded="2xl">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+        </svg>
+      </ColoredIcon>
+      <ColoredIcon color="blue" size="lg" rounded="2xl">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+        </svg>
+      </ColoredIcon>
+      <ColoredIcon color="green" size="lg" rounded="2xl">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+        </svg>
+      </ColoredIcon>
+      <ColoredIcon color="amber" size="lg" rounded="2xl">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+        </svg>
+      </ColoredIcon>
+      <ColoredIcon color="purple" size="lg" rounded="2xl">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+        </svg>
+      </ColoredIcon>
+      <ColoredIcon color="gray" size="lg" rounded="2xl">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+        </svg>
+      </ColoredIcon>
+    </div>
+  </div>
+
+  <!-- Usage Instructions -->
+  <div class="bg-white p-8 rounded-xl border border-gray-100 mt-8">
+    <Heading level="3" size="sm" class="mb-4">How to Use Color Variants</Heading>
+    
+    <div class="grid md:grid-cols-2 gap-8">
+      <div>
+        <h4 class="font-semibold text-gray-900 mb-2">InfoBox & InfoBoxHorizontal</h4>
+        <pre class="bg-gray-50 p-4 rounded-md text-sm overflow-x-auto">
+{`<InfoBox
+  icon={icon}
+  value="Value"
+  title="Title"
+  color="primary|blue|green|amber|purple|gray"
+  bgColor="white|light|blue|green|amber|purple|gray"
+/>`}
+        </pre>
+      </div>
+      
+      <div>
+        <h4 class="font-semibold text-gray-900 mb-2">InfoBoxHorizontal Accents</h4>
+        <pre class="bg-gray-50 p-4 rounded-md text-sm overflow-x-auto">
+{`<InfoBoxHorizontal
+  icon={icon}
+  value="Value"
+  title="Title"
+  accent="primary|blue|green|amber|purple|gray|none"
+  color="primary|blue|green|amber|purple|gray"
+  bgColor="white|light|blue|green|amber|purple|gray"
+/>`}
+        </pre>
+      </div>
+    </div>
+  </div>
+</Section>

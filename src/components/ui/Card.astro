@@ -1,0 +1,58 @@
+---
+/**
+ * Modern Card Component with color variants
+ */
+interface Props {
+  class?: string;
+  hover?: boolean;
+  color?: 'white' | 'blue' | 'green' | 'amber' | 'purple' | 'gray';
+}
+
+const { 
+  class: className = '',
+  hover = true,
+  color = 'white'
+} = Astro.props;
+
+// Color variants
+const colorVariants = {
+  white: 'bg-white',
+  blue: 'bg-blue-50',
+  green: 'bg-green-50',
+  amber: 'bg-amber-50',
+  purple: 'bg-purple-50',
+  gray: 'bg-gray-50',
+};
+
+// Border color variants - matching InfoBox components
+const borderColors = {
+  white: 'border-gray-200',
+  blue: 'border-blue-200/70',
+  green: 'border-green-200/70',
+  amber: 'border-amber-200/70',
+  purple: 'border-purple-200/70',
+  gray: 'border-gray-200',
+};
+
+// Hover state - matching InfoBox hover behavior
+const hoverEffects = {
+  white: 'hover:border-gray-300 hover:bg-gray-50/50',
+  blue: 'hover:border-blue-300/50 hover:bg-blue-50/70',
+  green: 'hover:border-green-300/50 hover:bg-green-50/70',
+  amber: 'hover:border-amber-300/50 hover:bg-amber-50/70',
+  purple: 'hover:border-purple-300/50 hover:bg-purple-50/70',
+  gray: 'hover:border-gray-300 hover:bg-gray-100/50',
+};
+
+// Base styles
+const baseStyles = `${colorVariants[color]} ${borderColors[color]} rounded-xl p-7 border transition-all duration-300`;
+
+// Hover effects if enabled
+const hoverStyles = hover ? `${hoverEffects[color]}` : '';
+
+const styles = `${baseStyles} ${hoverStyles} ${className}`;
+---
+
+<div class={styles}>
+  <slot />
+</div>
