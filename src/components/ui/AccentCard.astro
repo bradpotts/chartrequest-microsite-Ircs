@@ -1,0 +1,66 @@
+---
+/**
+ * AccentCard Component - A card with an accent border on the left
+ */
+interface Props {
+  accent?: 'primary' | 'blue' | 'green' | 'amber' | 'purple' | 'gray';
+  color?: 'white' | 'light' | 'blue' | 'green' | 'amber' | 'purple' | 'gray';
+  hover?: boolean;
+  class?: string;
+}
+
+const { 
+  accent = 'primary',
+  color = 'white',
+  hover = true,
+  class: className = ''
+} = Astro.props;
+
+// Background color variants
+const bgColors = {
+  white: 'bg-white',
+  light: 'bg-gray-50',
+  blue: 'bg-blue-50',
+  green: 'bg-green-50',
+  amber: 'bg-amber-50',
+  purple: 'bg-purple-50',
+  gray: 'bg-gray-50',
+};
+
+// Border color variants
+const borderColors = {
+  white: 'border-gray-200',
+  light: 'border-gray-200',
+  blue: 'border-blue-200/70',
+  green: 'border-green-200/70',
+  amber: 'border-amber-200/70',
+  purple: 'border-purple-200/70',
+  gray: 'border-gray-200',
+};
+
+// Accent colors
+const accentColors = {
+  primary: 'border-l-primary',
+  blue: 'border-l-blue-500',
+  green: 'border-l-emerald-500',
+  amber: 'border-l-amber-500',
+  purple: 'border-l-purple-500',
+  gray: 'border-l-gray-500',
+};
+
+// Hover effects
+const hoverEffects = hover ? {
+  primary: 'hover:border-primary/60 hover:bg-primary/[0.02]',
+  blue: 'hover:border-blue-300/50 hover:bg-blue-50/70',
+  green: 'hover:border-green-300/50 hover:bg-green-50/70',
+  amber: 'hover:border-amber-300/50 hover:bg-amber-50/70',
+  purple: 'hover:border-purple-300/50 hover:bg-purple-50/70',
+  gray: 'hover:border-gray-300 hover:bg-gray-100/50',
+}[accent] : '';
+
+const styles = `${bgColors[color]} ${borderColors[color]} ${hoverEffects} border border-l-4 ${accentColors[accent]} rounded-xl p-4 transition-all duration-300 ${className}`;
+---
+
+<div class={styles}>
+  <slot />
+</div>

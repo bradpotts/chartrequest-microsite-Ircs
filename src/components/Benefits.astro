@@ -3,10 +3,9 @@
 import Section from './ui/Section.astro';
 import Heading from './ui/Heading.astro';
 import Card from './ui/Card.astro';
-import InfoBoxHorizontal from './ui/InfoBoxHorizontal.astro';
 ---
 
-<Section background="light" id="benefits">
+<Section background="white" id="benefits">
 	<!-- Section Header -->
 	<div class="text-center mb-16">
 		<Heading level="2" size="lg">
@@ -21,64 +20,72 @@ import InfoBoxHorizontal from './ui/InfoBoxHorizontal.astro';
 			<!-- Left Content - Benefits List -->
 			<div class="space-y-8">
 				<!-- Enhance Your Resume -->
-				<div class="flex items-start space-x-4">
-					<div class="w-12 h-12 bg-blue-600 rounded-xl flex items-center justify-center flex-shrink-0">
-						<svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
-						</svg>
+				<Card color="white">
+					<div class="flex items-start space-x-4">
+						<div class="w-12 h-12 bg-blue-600 rounded-xl flex items-center justify-center flex-shrink-0">
+							<svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
+							</svg>
+						</div>
+						<div>
+							<h3 class="text-xl font-bold text-gray-900 mb-2">Enhance Your Resume</h3>
+							<p class="text-gray-600 leading-relaxed">
+								Demonstrate specialized knowledge in healthcare information compliance to potential employers
+							</p>
+						</div>
 					</div>
-					<div>
-						<h3 class="text-xl font-bold text-gray-900 mb-2">Enhance Your Resume</h3>
-						<p class="text-gray-600 leading-relaxed">
-							Demonstrate specialized knowledge in healthcare information compliance to potential employers
-						</p>
-					</div>
-				</div>
+				</Card>
 
 				<!-- Professional Credentials -->
-				<div class="flex items-start space-x-4">
-					<div class="w-12 h-12 bg-green-600 rounded-xl flex items-center justify-center flex-shrink-0">
-						<svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
-							<path d="M12 2L3 7l9 5 9-5-9-5zM3 17l9 5 9-5M3 12l9 5 9-5"/>
-						</svg>
+				<Card color="white">
+					<div class="flex items-start space-x-4">
+						<div class="w-12 h-12 bg-green-600 rounded-xl flex items-center justify-center flex-shrink-0">
+							<svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+								<path d="M12 2L3 7l9 5 9-5-9-5zM3 17l9 5 9-5M3 12l9 5 9-5"/>
+							</svg>
+						</div>
+						<div>
+							<h3 class="text-xl font-bold text-gray-900 mb-2">Professional Credentials</h3>
+							<p class="text-gray-600 leading-relaxed">
+								Add to your LinkedIn profile and professional credentials to stand out in the field
+							</p>
+						</div>
 					</div>
-					<div>
-						<h3 class="text-xl font-bold text-gray-900 mb-2">Professional Credentials</h3>
-						<p class="text-gray-600 leading-relaxed">
-							Add to your LinkedIn profile and professional credentials to stand out in the field
-						</p>
-					</div>
-				</div>
+				</Card>
 
 				<!-- Internal Compliance Reviews -->
-				<div class="flex items-start space-x-4">
-					<div class="w-12 h-12 bg-purple-600 rounded-xl flex items-center justify-center flex-shrink-0">
-						<svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-						</svg>
+				<Card color="white">
+					<div class="flex items-start space-x-4">
+						<div class="w-12 h-12 bg-purple-600 rounded-xl flex items-center justify-center flex-shrink-0">
+							<svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+							</svg>
+						</div>
+						<div>
+							<h3 class="text-xl font-bold text-gray-900 mb-2">Internal Compliance Reviews</h3>
+							<p class="text-gray-600 leading-relaxed">
+								Lead or participate in internal audits with recognized expertise
+							</p>
+						</div>
 					</div>
-					<div>
-						<h3 class="text-xl font-bold text-gray-900 mb-2">Internal Compliance Reviews</h3>
-						<p class="text-gray-600 leading-relaxed">
-							Lead or participate in internal audits with recognized expertise
-						</p>
-					</div>
-				</div>
+				</Card>
 
 				<!-- Career Advancement -->
-				<div class="flex items-start space-x-4">
-					<div class="w-12 h-12 bg-orange-600 rounded-xl flex items-center justify-center flex-shrink-0">
-						<svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"/>
-						</svg>
+				<Card color="white">
+					<div class="flex items-start space-x-4">
+						<div class="w-12 h-12 bg-orange-600 rounded-xl flex items-center justify-center flex-shrink-0">
+							<svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"/>
+							</svg>
+						</div>
+						<div>
+							<h3 class="text-xl font-bold text-gray-900 mb-2">Career Advancement</h3>
+							<p class="text-gray-600 leading-relaxed">
+								Qualify for specialized roles and potential salary increases in healthcare organizations
+							</p>
+						</div>
 					</div>
-					<div>
-						<h3 class="text-xl font-bold text-gray-900 mb-2">Career Advancement</h3>
-						<p class="text-gray-600 leading-relaxed">
-							Qualify for specialized roles and potential salary increases in healthcare organizations
-						</p>
-					</div>
-				</div>
+				</Card>
 			</div>
 
 			<!-- Right Image -->
@@ -87,24 +94,11 @@ import InfoBoxHorizontal from './ui/InfoBoxHorizontal.astro';
 					<img 
 						src="/images/ircs-image-ircs-certification.webp" 
 						alt="IRCS Certification Benefits Illustration" 
-						class="w-full h-auto rounded-2xl"
+						class="w-full h-auto rounded-2xl border-2 border-blue-200"
 					/>
 				</div>
 				<!-- Background decoration -->
 				<div class="absolute -top-6 -left-6 w-full h-full bg-blue-100 rounded-2xl -z-10"></div>
-				
-				<!-- Floating elements for visual interest -->
-				<div class="absolute -top-4 -right-4 w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center shadow-lg">
-					<svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-					</svg>
-				</div>
-				
-				<div class="absolute -bottom-4 -left-4 w-12 h-12 bg-green-500 rounded-full flex items-center justify-center shadow-lg">
-					<svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
-						<path d="M12 2L3 7l9 5 9-5-9-5zM3 17l9 5 9-5M3 12l9 5 9-5"/>
-					</svg>
-				</div>
 			</div>
 		</div>
 </Section>
