@@ -1,22 +1,24 @@
 ---
 // Enroll component for IRCS Certification enrollment form
 import Section from './ui/Section.astro';
+import Card from './ui/Card.astro';
+import Heading from './ui/Heading.astro';
 ---
 
 <Section background="white" id="enroll">
 	<div class="max-w-4xl mx-auto">
 		<!-- Section Header -->
 		<div class="text-center mb-12">
-			<h2 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+			<Heading level="2" size="lg" class="mb-4">
 				Enroll in <span class="text-blue-600">IRCS Certification</span>
-			</h2>
+			</Heading>
 			<p class="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
 				Complete the form below to begin your enrollment process. You'll receive access to the training materials within 24 hours.
 			</p>
 		</div>
 
 		<!-- Enrollment Form -->
-		<div class="bg-gray-50 rounded-2xl p-8 lg:p-12">
+		<Card color="gray" class="p-8 lg:p-12 bg-gray-100">
 			<form class="space-y-6">
 				<!-- Name and Email Row -->
 				<div class="grid md:grid-cols-2 gap-6">
@@ -107,7 +109,7 @@ import Section from './ui/Section.astro';
 				</div>
 
 				<!-- Enrollment Summary -->
-				<div class="bg-white rounded-xl p-6 border border-gray-200">
+				<Card color="white" class="p-6">
 					<h3 class="text-lg font-bold text-gray-900 mb-4 text-center">Enrollment Summary</h3>
 					
 					<div class="flex justify-between items-center mb-4">
@@ -122,17 +124,17 @@ import Section from './ui/Section.astro';
 					<!-- Submit Button -->
 					<button 
 						type="submit"
-						class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-4 px-8 rounded-full transition-colors text-lg"
+						class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-4 px-8 rounded-full transition-all duration-200 text-lg shadow-sm hover:shadow-md hover:-translate-y-0.5"
 					>
 						Complete Enrollment
 					</button>
-				</div>
+				</Card>
 
 				<!-- Terms and Privacy -->
 				<div class="text-center text-sm text-gray-600">
 					<p>By enrolling, you agree to our <a href="#" class="text-blue-600 hover:text-blue-700">terms of service</a> and <a href="#" class="text-blue-600 hover:text-blue-700">privacy policy</a></p>
 				</div>
 			</form>
-		</div>
+		</Card>
 	</div>
 </Section>

@@ -1,0 +1,90 @@
+---
+/**
+ * Text Component for standardized typography
+ * Use this component for consistent text styling across the site
+ * 
+ * @example
+ * ```astro
+ * <Text variant="lead" color="primary" align="center">
+ *   Important announcement text
+ * </Text>
+ * ```
+ */
+interface Props {
+  /** Text style variant */
+  variant?: 'body' | 'lead' | 'small' | 'caption' | 'stat' | 'accent' | 'label';
+  /** Text color variant */
+  color?: 'default' | 'primary' | 'muted' | 'white';
+  /** Text alignment */
+  align?: 'left' | 'center' | 'right';
+  /** Font weight (not applied to variants with predefined weights) */
+  weight?: 'normal' | 'medium' | 'semibold' | 'bold';
+  /** HTML element to render */
+  as?: 'p' | 'span' | 'div';
+  /** Additional CSS classes */
+  class?: string;
+  /** Optional ID for the element */
+  id?: string;
+}
+
+const {
+  variant = 'body',
+  color = 'default',
+  align = 'left',
+  weight = 'normal',
+  as = 'p',
+  class: className = '',
+  id
+} = Astro.props as Props;
+
+// Typography variants with appropriate size, weight, and line height
+// Note: stat, accent, and label variants include their own font-weight
+const variantStyles = {
+  body: 'text-base leading-relaxed',           // Standard paragraph text
+  lead: 'text-base md:text-lg leading-relaxed', // Introduction paragraphs
+  small: 'text-sm leading-normal',             // Secondary information
+  caption: 'text-xs leading-normal',           // Small caption text
+  stat: 'text-3xl font-bold leading-tight',    // Statistical values (includes weight)
+  accent: 'text-base md:text-lg font-semibold', // Emphasized text (includes weight)
+  label: 'text-sm font-medium uppercase tracking-wider' // Form labels, categories (includes weight)
+};
+
+// Color variants
+const colorStyles = {
+  default: 'text-gray-700',
+  primary: 'text-blue-600',
+  muted: 'text-gray-500',
+  white: 'text-white'
+};
+
+// Weight variants (only applied if not already in the variant)
+const weightStyles = {
+  normal: 'font-normal',
+  medium: 'font-medium',
+  semibold: 'font-semibold',
+  bold: 'font-bold'
+};
+
+// Text alignment
+const alignStyles = {
+  left: 'text-left',
+  center: 'text-center',
+  right: 'text-right'
+};
+
+// Only apply weight style if it's not already defined in the variant
+// This prevents conflicts between variant-specific weights and explicitly provided weights
+const shouldApplyWeight = !(variant === 'stat' || variant === 'accent' || variant === 'label');
+
+// Safe access to styles with fallbacks
+const variantStyle = variantStyles[variant as keyof typeof variantStyles] || 'text-base';
+const colorStyle = colorStyles[color as keyof typeof colorStyles] || 'text-gray-700';
+const alignStyle = alignStyles[align as keyof typeof alignStyles] || 'text-left';
+const weightStyle = shouldApplyWeight ? weightStyles[weight as keyof typeof weightStyles] || '' : '';
+
+const styles = `${variantStyle} ${colorStyle} ${alignStyle} ${weightStyle} ${className}`;
+---
+
+{as === 'p' && <p class={styles} id={id}><slot /></p>}
+{as === 'span' && <span class={styles} id={id}><slot /></span>}
+{as === 'div' && <div class={styles} id={id}><slot /></div>}

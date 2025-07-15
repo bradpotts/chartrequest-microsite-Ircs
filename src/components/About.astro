@@ -6,6 +6,7 @@ import InfoBoxHorizontal from './ui/InfoBoxHorizontal.astro';
 import InfoBox from './ui/InfoBox.astro';
 import ColoredIcon from './ui/ColoredIcon.astro';
 import Card from './ui/Card.astro';
+import Text from './ui/Text.astro';
 
 // Icons as SVG strings
 const shieldIcon = `<img src="/images/ircs-icon-whats-ircs.svg" alt="Shield" class="w-6 h-6" />`;
@@ -29,9 +30,9 @@ const learningItems = [
     <Heading level="2" size="lg">
       About the <span class="text-blue-600">IRCS Certification</span>
     </Heading>
-    <p class="text-lg text-gray-600 max-w-4xl mx-auto leading-relaxed">
+    <Text variant="lead" color="muted" align="center" class="max-w-4xl mx-auto">
       Professional credential that validates your expertise in managing protected health information in accordance with HIPAA regulations and state laws.
-    </p>
+    </Text>
   </div>
 
   <!-- Main Content Grid -->
@@ -46,9 +47,9 @@ const learningItems = [
         bgColor="blue"
         accent="blue"
       >
-        <p class="text-gray-700 leading-relaxed mt-4">
+        <Text variant="body" class="mt-4">
           The Information Release and Compliance Specialist (IRCS) certification is a professional credential that validates your expertise in managing protected health information in accordance with HIPAA regulations and state laws.
-        </p>
+        </Text>
       </InfoBoxHorizontal>
 
       <!-- What You'll Learn InfoBox -->
@@ -65,7 +66,7 @@ const learningItems = [
               <span class="text-green-600 mt-1 mr-3 flex-shrink-0">
                 <Fragment set:html={checkIcon} />
               </span>
-              <span class="text-gray-700">{item}</span>
+              <Text as="span" variant="body">{item}</Text>
             </div>
           ))}
         </div>
@@ -82,14 +83,14 @@ const learningItems = [
               <Fragment set:html={certIcon} />
             </ColoredIcon>
           </div>
-          <Heading level="3" size="md" class="mb-2">IRCS Certification</Heading>
-          <p class="text-blue-600 font-semibold text-lg">Valid for 2 years</p>
+          <Heading level="3" size="md" class="mb-1">IRCS Certification</Heading>
+          <Text variant="accent" color="primary" align="center" class="text-blue-600">Valid for 2 years</Text>
         </div>
 
         <!-- Description -->
-        <p class="text-center text-gray-600 mb-8 text-lg leading-relaxed">
+        <Text variant="body" color="muted" align="center" class="mb-8">
           Upon successful completion, you'll receive a professional certification recognized throughout the healthcare industry.
-        </p>
+        </Text>
 
         <!-- Certification Details -->
         <div class="grid md:grid-cols-3 gap-6">

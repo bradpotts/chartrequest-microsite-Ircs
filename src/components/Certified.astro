@@ -4,6 +4,7 @@ import Section from './ui/Section.astro';
 import Heading from './ui/Heading.astro';
 import Card from './ui/Card.astro';
 import AccentCard from './ui/AccentCard.astro';
+import Text from './ui/Text.astro';
 
 // Data for additional roles
 const additionalRoles = [
@@ -22,9 +23,9 @@ const additionalRoles = [
 		<Heading level="2" size="lg">
 			Who Should Get <span class="text-primary">Certified?</span>
 		</Heading>
-		<p class="text-lg text-gray-600 max-w-4xl mx-auto mt-4 leading-relaxed">
+		<Text variant="lead" color="muted" align="center" class="max-w-4xl mx-auto mt-4">
 			The IRCS certification is designed for healthcare professionals who manage or handle protected health information as part of their daily responsibilities.
-		</p>
+		</Text>
 	</div>
 
 	<!-- Primary Roles Grid -->
@@ -35,9 +36,9 @@ const additionalRoles = [
 				<img src="/images/ircs-icon-roi-specialists.svg" alt="ROI Specialists" class="w-8 h-8" />
 			</div>
 			<Heading level="3" size="sm" class="mb-4">ROI Specialists</Heading>
-			<p class="text-gray-600 leading-relaxed">
+			<Text variant="body" color="muted" align="center">
 				Staff focused on managing release of information processes
-			</p>
+			</Text>
 		</Card>
 
 		<!-- HIM Professionals -->
@@ -46,9 +47,9 @@ const additionalRoles = [
 				<img src="/images/ircs-icon-him-professionals.svg" alt="HIM Professionals" class="w-8 h-8" />
 			</div>
 			<Heading level="3" size="sm" class="mb-4">HIM Professionals</Heading>
-			<p class="text-gray-600 leading-relaxed">
+			<Text variant="body" color="muted" align="center">
 				Health Information Management staff overseeing medical records
-			</p>
+			</Text>
 		</Card>
 
 		<!-- Compliance Officers -->
@@ -57,9 +58,9 @@ const additionalRoles = [
 				<img src="/images/ircs-icon-compliance-officers.svg" alt="Compliance Officers" class="w-8 h-8" />
 			</div>
 			<Heading level="3" size="sm" class="mb-4">Compliance Officers</Heading>
-			<p class="text-gray-600 leading-relaxed">
+			<Text variant="body" color="muted" align="center">
 				Professionals responsible for ensuring regulatory compliance
-			</p>
+			</Text>
 		</Card>
 	</div>
 

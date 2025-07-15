@@ -3,17 +3,18 @@
 import Section from './ui/Section.astro';
 import Heading from './ui/Heading.astro';
 import Card from './ui/Card.astro';
+import Text from './ui/Text.astro';
 ---
 
 <Section background="white" id="benefits">
 	<!-- Section Header -->
 	<div class="text-center mb-16">
 		<Heading level="2" size="lg">
-			How You Can Use Your <span class="text-primary">IRCS Certification</span>
+			How You Can Use Your <span class="text-blue-600">IRCS Certification</span>
 		</Heading>
-		<p class="text-lg text-gray-600 max-w-4xl mx-auto mt-4 leading-relaxed">
+		<Text variant="lead" color="muted" align="center" class="max-w-4xl mx-auto mt-4">
 			Unlock new opportunities and advance your career with industry-recognized expertise
-		</p>
+		</Text>
 	</div>
 
 		<div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
@@ -28,10 +29,10 @@ import Card from './ui/Card.astro';
 							</svg>
 						</div>
 						<div>
-							<h3 class="text-xl font-bold text-gray-900 mb-2">Enhance Your Resume</h3>
-							<p class="text-gray-600 leading-relaxed">
+							<Heading level="3" size="sm" class="mb-2">Enhance Your Resume</Heading>
+							<Text variant="body" color="muted">
 								Demonstrate specialized knowledge in healthcare information compliance to potential employers
-							</p>
+							</Text>
 						</div>
 					</div>
 				</Card>
@@ -45,10 +46,10 @@ import Card from './ui/Card.astro';
 							</svg>
 						</div>
 						<div>
-							<h3 class="text-xl font-bold text-gray-900 mb-2">Professional Credentials</h3>
-							<p class="text-gray-600 leading-relaxed">
+							<Heading level="3" size="sm" class="mb-2">Professional Credentials</Heading>
+							<Text variant="body" color="muted">
 								Add to your LinkedIn profile and professional credentials to stand out in the field
-							</p>
+							</Text>
 						</div>
 					</div>
 				</Card>
@@ -62,10 +63,10 @@ import Card from './ui/Card.astro';
 							</svg>
 						</div>
 						<div>
-							<h3 class="text-xl font-bold text-gray-900 mb-2">Internal Compliance Reviews</h3>
-							<p class="text-gray-600 leading-relaxed">
+							<Heading level="3" size="sm" class="mb-2">Internal Compliance Reviews</Heading>
+							<Text variant="body" color="muted">
 								Lead or participate in internal audits with recognized expertise
-							</p>
+							</Text>
 						</div>
 					</div>
 				</Card>
@@ -79,10 +80,10 @@ import Card from './ui/Card.astro';
 							</svg>
 						</div>
 						<div>
-							<h3 class="text-xl font-bold text-gray-900 mb-2">Career Advancement</h3>
-							<p class="text-gray-600 leading-relaxed">
+							<Heading level="3" size="sm" class="mb-2">Career Advancement</Heading>
+							<Text variant="body" color="muted">
 								Qualify for specialized roles and potential salary increases in healthcare organizations
-							</p>
+							</Text>
 						</div>
 					</div>
 				</Card>

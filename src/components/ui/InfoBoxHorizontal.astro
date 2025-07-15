@@ -85,9 +85,8 @@ const accentClass = accent !== 'none' ? `border-l-4 ${accentColors[accent]}` : '
       <div class={`${iconColors[color]} mr-4 flex-shrink-0`}>
         <Fragment set:html={icon} />
       </div>
-    )}
-    <div>
-      {value && <div class="text-2xl font-bold text-gray-900">{value}</div>}
+    )}      <div>
+      {value && <div class="text-3xl font-bold text-gray-900">{value}</div>}
       <div class="text-gray-600 font-medium">{title}</div>
     </div>
   </div>
