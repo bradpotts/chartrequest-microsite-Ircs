@@ -14,7 +14,7 @@ interface Props {
   /** Text style variant */
   variant?: 'body' | 'lead' | 'small' | 'caption' | 'stat' | 'accent' | 'label';
   /** Text color variant */
-  color?: 'default' | 'primary' | 'muted' | 'white';
+  color?: 'default' | 'primary' | 'muted' | 'dark' | 'white';
   /** Text alignment */
   align?: 'left' | 'center' | 'right';
   /** Font weight (not applied to variants with predefined weights) */
@@ -49,11 +49,12 @@ const variantStyles = {
   label: 'text-sm font-medium uppercase tracking-wider' // Form labels, categories (includes weight)
 };
 
-// Color variants
+// Color variants - optimized for conversion and readability
 const colorStyles = {
-  default: 'text-gray-700',
-  primary: 'text-blue-600',
-  muted: 'text-gray-500',
+  default: 'text-gray-800',     // Darker for better readability
+  primary: 'text-blue-600',     // Keeps your brand color
+  muted: 'text-gray-600',       // Less muted for better conversion
+  dark: 'text-gray-900',        // High contrast for important copy
   white: 'text-white'
 };
 
@@ -78,7 +79,7 @@ const shouldApplyWeight = !(variant === 'stat' || variant === 'accent' || varian
 
 // Safe access to styles with fallbacks
 const variantStyle = variantStyles[variant as keyof typeof variantStyles] || 'text-base';
-const colorStyle = colorStyles[color as keyof typeof colorStyles] || 'text-gray-700';
+const colorStyle = colorStyles[color as keyof typeof colorStyles] || 'text-gray-800';
 const alignStyle = alignStyles[align as keyof typeof alignStyles] || 'text-left';
 const weightStyle = shouldApplyWeight ? weightStyles[weight as keyof typeof weightStyles] || '' : '';
 

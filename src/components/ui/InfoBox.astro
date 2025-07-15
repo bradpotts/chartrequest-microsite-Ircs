@@ -36,7 +36,7 @@ const iconColors: Record<string, string> = {
   green: 'text-green-600',
   amber: 'text-amber-500',
   purple: 'text-purple-600',
-  gray: 'text-gray-600',
+  gray: 'text-gray-800',
 };
 
 // Background color variants
@@ -85,12 +85,12 @@ const cardStyle = `${bgColors[bgColor]} ${borderColors[bgColor]} ${hoverEffects[
     {value && <Heading level={titleLevel} size={titleSize} align="center" class="mb-1">
       {value}
     </Heading>}
-    <Text variant="body" color="muted" align="center" class="text-sm uppercase tracking-wide font-medium">
+    <Text variant="body" color="default" align="center" class="text-sm uppercase tracking-wide font-medium">
       {title}
     </Text>
   </div>
   {description && (
-    <Text variant="body" color="muted" align="center" class="mb-4">
+    <Text variant="body" color="default" align="center" class="mb-4">
       {description}
     </Text>
   )}

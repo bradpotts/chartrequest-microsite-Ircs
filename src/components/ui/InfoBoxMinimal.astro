@@ -34,7 +34,7 @@ const iconColors: Record<string, string> = {
   green: 'text-green-600',
   amber: 'text-amber-500',
   purple: 'text-purple-600',
-  gray: 'text-gray-600',
+  gray: 'text-gray-800',
 };
 
 ---
@@ -46,8 +46,8 @@ const iconColors: Record<string, string> = {
     </div>
   )}
   {value && <Text variant="stat" class="mb-1">{value}</Text>}
-  <Heading level={titleLevel} size={titleSize} color="muted" align="center" class="uppercase tracking-wider mb-2">
+  <Heading level={titleLevel} size={titleSize} color="default" align="center" class="uppercase tracking-wider mb-2">
     {title}
   </Heading>
-  {description && <Text variant="small" color="muted" align="center" class="mt-2">{description}</Text>}
+  {description && <Text variant="small" color="default" align="center" class="mt-2">{description}</Text>}
 </div>
