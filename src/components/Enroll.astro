@@ -3,18 +3,19 @@
 import Section from './ui/Section.astro';
 import Card from './ui/Card.astro';
 import Heading from './ui/Heading.astro';
+import Text from './ui/Text.astro';
 ---
 
 <Section background="white" id="enroll">
 	<div class="max-w-4xl mx-auto">
 		<!-- Section Header -->
-		<div class="text-center mb-12">
-			<Heading level="2" size="lg" class="mb-4">
+		<div class="text-center mb-16">
+			<Heading level="2" size="lg" align="center" color="primary" class="font-bold mb-4">
 				Enroll in <span class="text-blue-600">IRCS Certification</span>
 			</Heading>
-			<p class="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
+			<Text variant="lead" color="muted" align="center" class="max-w-3xl mx-auto">
 				Complete the form below to begin your enrollment process. You'll receive access to the training materials within 24 hours.
-			</p>
+			</Text>
 		</div>
 
 		<!-- Enrollment Form -->

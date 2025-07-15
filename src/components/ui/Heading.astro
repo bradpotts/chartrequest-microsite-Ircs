@@ -1,18 +1,25 @@
 ---
 /**
- * Modern Heading Component
+ * Modern Heading Component with improved typography
  */
 interface Props {
-  level?: '1' | '2' | '3' | '4' | '5' | '6';
+  level?: '1' | '2' | '3' | '4' | '5' | '6' | 1 | 2 | 3 | 4 | 5 | 6;
   size?: 'xl' | 'lg' | 'md' | 'sm';
+  color?: 'default' | 'primary' | 'muted' | 'white' | 'blue';
+  align?: 'left' | 'center' | 'right';
   class?: string;
 }
 
 const { 
   level = '2',
-  size = 'lg', 
+  size = 'lg',
+  color = 'default',
+  align = 'left',
   class: className = '' 
 } = Astro.props;
+
+// Convert numeric levels to strings if needed
+const headingLevel = typeof level === 'number' ? String(level) : level;
 
 // Map size to specific Tailwind classes
 const sizeStyles = {
@@ -22,14 +29,30 @@ const sizeStyles = {
   sm: 'text-xl font-semibold leading-snug'
 };
 
-const styles = `${sizeStyles[size]} text-gray-900 ${className}`;
+// Text color variants
+const colorStyles = {
+  default: 'text-gray-900',
+  primary: 'text-primary',
+  muted: 'text-gray-600',
+  white: 'text-white',
+  blue: 'text-blue-600'
+};
+
+// Text alignment
+const alignStyles = {
+  left: 'text-left',
+  center: 'text-center',
+  right: 'text-right'
+};
+
+const styles = `${sizeStyles[size]} ${colorStyles[color]} ${alignStyles[align]} ${className}`;
 
 // Use a dynamic tag approach
 ---
 
-{level === '1' && <h1 class={styles}><slot /></h1>}
-{level === '2' && <h2 class={styles}><slot /></h2>}
-{level === '3' && <h3 class={styles}><slot /></h3>}
-{level === '4' && <h4 class={styles}><slot /></h4>}
-{level === '5' && <h5 class={styles}><slot /></h5>}
-{level === '6' && <h6 class={styles}><slot /></h6>}
+{headingLevel === '1' && <h1 class={styles}><slot /></h1>}
+{headingLevel === '2' && <h2 class={styles}><slot /></h2>}
+{headingLevel === '3' && <h3 class={styles}><slot /></h3>}
+{headingLevel === '4' && <h4 class={styles}><slot /></h4>}
+{headingLevel === '5' && <h5 class={styles}><slot /></h5>}
+{headingLevel === '6' && <h6 class={styles}><slot /></h6>}

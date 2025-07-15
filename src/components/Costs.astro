@@ -7,6 +7,7 @@ import InfoBox from './ui/InfoBox.astro';
 import InfoBoxHorizontal from './ui/InfoBoxHorizontal.astro';
 import InfoBoxMinimal from './ui/InfoBoxMinimal.astro';
 import Button from './ui/Button.astro';
+import Text from './ui/Text.astro';
 
 // Icons
 const clockIcon = `<svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -28,13 +29,13 @@ const certificateIcon = `<svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8"
 
 <Section background="light" id="costs">
   <!-- Section Header -->
-  <div class="text-center mb-12">
-    <Heading level="2" size="lg">
+  <div class="text-center mb-16">
+    <Heading level="2" size="lg" align="center" color="primary" class="font-bold mb-4">
       Certification Cost and <span class="text-blue-600">Enrollment Details</span>
     </Heading>
-    <p class="text-lg text-gray-600 max-w-3xl mx-auto mt-4 leading-relaxed">
+    <Text variant="lead" color="muted" align="center" class="max-w-3xl mx-auto">
       Everything you need to get certified in one comprehensive package
-    </p>
+    </Text>
   </div>
 
   <!-- Main Content -->

@@ -2,10 +2,16 @@
 /**
  * InfoBox Component - A clean, modern stat/info box without heavy shadows
  */
+import Heading from './Heading.astro';
+import Text from './Text.astro';
+
 interface Props {
   icon?: string;
   title: string;
+  titleLevel?: '1' | '2' | '3' | '4' | '5' | '6' | 1 | 2 | 3 | 4 | 5 | 6;
+  titleSize?: 'xl' | 'lg' | 'md' | 'sm';
   value?: string;
+  description?: string;
   color?: 'primary' | 'blue' | 'green' | 'amber' | 'purple' | 'gray';
   bgColor?: 'white' | 'light' | 'blue' | 'green' | 'amber' | 'purple' | 'gray';
   class?: string;
@@ -14,14 +20,17 @@ interface Props {
 const { 
   icon,
   title, 
+  titleLevel = '3',
+  titleSize = 'sm',
   value,
+  description,
   color = 'primary',
   bgColor = 'white',
   class: className = ''
 } = Astro.props;
 
 // Color variants for icons
-const iconColors = {
+const iconColors: Record<string, string> = {
   primary: 'text-primary',
   blue: 'text-blue-600',
   green: 'text-green-600',
@@ -31,7 +40,7 @@ const iconColors = {
 };
 
 // Background color variants
-const bgColors = {
+const bgColors: Record<string, string> = {
   white: 'bg-white',
   light: 'bg-gray-50',
   blue: 'bg-blue-50',
@@ -41,8 +50,8 @@ const bgColors = {
   gray: 'bg-gray-50',
 };
 
-// Border color variants - just slightly darker than the background
-const borderColors = {
+// Border color variants
+const borderColors: Record<string, string> = {
   white: 'border-gray-200',
   light: 'border-gray-200',
   blue: 'border-blue-200/70',
@@ -52,8 +61,8 @@ const borderColors = {
   gray: 'border-gray-200',
 };
 
-// Hover state - subtle transitions
-const hoverEffects = {
+// Hover state
+const hoverEffects: Record<string, string> = {
   white: 'hover:border-gray-300 hover:bg-gray-50/50',
   light: 'hover:border-gray-300 hover:bg-gray-100/50',
   blue: 'hover:border-blue-300/50 hover:bg-blue-50/70',
@@ -63,15 +72,23 @@ const hoverEffects = {
   gray: 'hover:border-gray-300 hover:bg-gray-100/50',
 };
 
-const styles = `${bgColors[bgColor]} ${borderColors[bgColor]} ${hoverEffects[bgColor]} border rounded-xl p-6 flex flex-col items-center text-center transition-all duration-300 ${className}`;
+const cardStyle = `${bgColors[bgColor]} ${borderColors[bgColor]} ${hoverEffects[bgColor]} border rounded-xl p-6 flex flex-col items-center text-center transition-all duration-300 ${className}`;
 ---
 
-<div class={styles}>
+<div class={cardStyle}>
   {icon && (
     <div class={`${iconColors[color]} mb-3 opacity-90`}>
       <Fragment set:html={icon} />
     </div>
   )}
-  {value && <div class="text-3xl font-bold text-gray-900 mb-1">{value}</div>}
-  <div class="text-gray-600 font-medium">{title}</div>
+  {value && <Text variant="stat" class="mb-1">{value}</Text>}
+  <Heading level={titleLevel} size={titleSize} color="default" align="center" class="mb-2">
+    {title}
+  </Heading>
+  {description && (
+    <Text variant="body" color="muted" align="center" class="mb-4">
+      {description}
+    </Text>
+  )}
+  <slot />
 </div>

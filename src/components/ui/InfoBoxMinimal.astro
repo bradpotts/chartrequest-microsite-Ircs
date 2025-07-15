@@ -2,9 +2,14 @@
 /**
  * InfoBox Minimal - Super clean with no borders
  */
+import Heading from './Heading.astro';
+import Text from './Text.astro';
+
 interface Props {
   icon?: string;
   title: string;
+  titleLevel?: '1' | '2' | '3' | '4' | '5' | '6' | 1 | 2 | 3 | 4 | 5 | 6;
+  titleSize?: 'xl' | 'lg' | 'md' | 'sm';
   value?: string;
   description?: string;
   color?: 'primary' | 'blue' | 'green' | 'amber' | 'purple' | 'gray';
@@ -14,6 +19,8 @@ interface Props {
 const { 
   icon,
   title,
+  titleLevel = '4',
+  titleSize = 'sm',
   value,
   description,
   color = 'primary',
@@ -21,7 +28,7 @@ const {
 } = Astro.props;
 
 // Color variants for icons
-const iconColors = {
+const iconColors: Record<string, string> = {
   primary: 'text-primary',
   blue: 'text-blue-600',
   green: 'text-green-600',
@@ -38,7 +45,9 @@ const iconColors = {
       <Fragment set:html={icon} />
     </div>
   )}
-  {value && <div class="text-3xl font-bold text-gray-900 mb-1">{value}</div>}
-  <div class="text-sm uppercase tracking-wider font-medium text-gray-500">{title}</div>
-  {description && <p class="text-gray-600 mt-2 text-sm">{description}</p>}
+  {value && <Text variant="stat" class="mb-1">{value}</Text>}
+  <Heading level={titleLevel} size={titleSize} color="muted" align="center" class="uppercase tracking-wider mb-2">
+    {title}
+  </Heading>
+  {description && <Text variant="small" color="muted" align="center" class="mt-2">{description}</Text>}
 </div>

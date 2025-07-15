@@ -2,18 +2,29 @@
 /**
  * AccentCard Component - A card with an accent border on the left
  */
+import Heading from './Heading.astro';
+import Text from './Text.astro';
+
 interface Props {
   accent?: 'primary' | 'blue' | 'green' | 'amber' | 'purple' | 'gray';
   color?: 'white' | 'light' | 'blue' | 'green' | 'amber' | 'purple' | 'gray';
   hover?: boolean;
   class?: string;
+  title?: string;
+  titleLevel?: '1' | '2' | '3' | '4' | '5' | '6' | 1 | 2 | 3 | 4 | 5 | 6;
+  titleSize?: 'xl' | 'lg' | 'md' | 'sm';
+  description?: string;
 }
 
 const { 
   accent = 'primary',
   color = 'white',
   hover = true,
-  class: className = ''
+  class: className = '',
+  title,
+  titleLevel = '3',
+  titleSize = 'sm',
+  description
 } = Astro.props;
 
 // Background color variants
@@ -62,5 +73,15 @@ const styles = `${bgColors[color]} ${borderColors[color]} ${hoverEffects} border
 ---
 
 <div class={styles}>
+  {title && (
+    <Heading level={titleLevel} size={titleSize} class="mb-2">
+      {title}
+    </Heading>
+  )}
+  {description && (
+    <Text variant="body" color="muted" class="mb-4">
+      {description}
+    </Text>
+  )}
   <slot />
 </div>
