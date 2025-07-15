@@ -76,13 +76,15 @@ const learningItems = [
       <Card color="white" class="p-8">
         <!-- Certification Badge -->
         <div class="text-center mb-8">
-          <div class="mx-auto mb-6">
-            <ColoredIcon color="blue" size="lg" rounded="full" class="mx-auto">
+          <div class="flex justify-center mb-6">
+            <ColoredIcon color="blue" size="lg" rounded="full">
               <Fragment set:html={certIcon} />
             </ColoredIcon>
           </div>
-          <Heading level="3" size="md" class="mb-1">IRCS Certification</Heading>
-          <Text variant="accent" color="primary" align="center" class="text-blue-600">Valid for 2 years</Text>
+          <div class="text-center w-full">
+            <Heading level="3" size="lg" align="center" class="mb-1 text-center">IRCS Certification</Heading>
+            <Text variant="accent" color="primary" align="center" class="text-blue-600 text-center">Valid for 2 years</Text>
+          </div>
         </div>
 
         <!-- Description -->
@@ -95,26 +97,26 @@ const learningItems = [
           <InfoBox 
             title="Duration"
             value="2-4 hours"
-            titleLevel="4"
-            titleSize="sm"
+            titleLevel="3"
             color="blue"
             bgColor="blue"
+            class="py-4"
           />
           <InfoBox 
             title="Format"
             value="Online"
-            titleLevel="4"
-            titleSize="sm"
+            titleLevel="3"
             color="green"
             bgColor="green"
+            class="py-4"
           />
           <InfoBox 
             title="Pass Rate"
             value="70%"
-            titleLevel="4"
-            titleSize="sm"
+            titleLevel="3"
             color="amber"
             bgColor="amber"
+            class="py-4"
           />
         </div>
       </Card>

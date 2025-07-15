@@ -81,10 +81,14 @@ const cardStyle = `${bgColors[bgColor]} ${borderColors[bgColor]} ${hoverEffects[
       <Fragment set:html={icon} />
     </div>
   )}
-  {value && <Text variant="stat" class="mb-1">{value}</Text>}
-  <Heading level={titleLevel} size={titleSize} color="default" align="center" class="mb-2">
-    {title}
-  </Heading>
+  <div class="flex flex-col items-center justify-center">
+    {value && <Heading level={titleLevel} size={titleSize} align="center" class="mb-1">
+      {value}
+    </Heading>}
+    <Text variant="body" color="muted" align="center" class="text-sm uppercase tracking-wide font-medium">
+      {title}
+    </Text>
+  </div>
   {description && (
     <Text variant="body" color="muted" align="center" class="mb-4">
       {description}

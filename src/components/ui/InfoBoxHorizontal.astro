@@ -84,24 +84,33 @@ const hoverEffects = {
 const accentClass = accent !== 'none' ? `border-l-4 ${accentColors[accent]}` : '';
 ---
 
-<div class={`${bgColors[bgColor]} ${borderColors[bgColor]} ${hoverEffects[bgColor]} border ${accentClass} rounded-xl p-5 transition-all duration-300 ${className}`}>
-  <div class="flex items-center">
-    {icon && (
-      <div class={`${iconColors[color]} mr-4 flex-shrink-0`}>
-        <Fragment set:html={icon} />
-      </div>
-    )}
-    <div>
-      {value && <Text variant="stat" class="mb-1">{value}</Text>}
-      <Heading level={titleLevel} size={titleSize} class="mb-2">
-        {title}
-      </Heading>
-      {description && (
-        <Text variant="body" color="muted" class="mb-2">
-          {description}
-        </Text>
+<div class={`${bgColors[bgColor]} ${borderColors[bgColor]} ${hoverEffects[bgColor]} border ${accentClass} rounded-xl p-6 transition-all duration-300 ${className}`}>
+  <!-- Header with icon and title -->
+  <div class="mb-4">
+    <div class="flex items-start">
+      {icon && (
+        <div class={`${iconColors[color]} mr-4 flex-shrink-0 mt-1`}>
+          <Fragment set:html={icon} />
+        </div>
       )}
+      <div class="flex-grow">
+        {/* Value comes first in horizontal layout */}
+        {value && <Text variant="stat" class="mb-1">{value}</Text>}
+        
+        <Heading level={titleLevel} size={titleSize} class="font-semibold">
+          {title}
+        </Heading>
+        
+        {/* Description */}
+        {description && (
+          <Text variant="body" color="muted" class="mt-1">
+            {description}
+          </Text>
+        )}
+      </div>
     </div>
   </div>
+  
+  {/* Additional content */}
   <slot />
 </div>

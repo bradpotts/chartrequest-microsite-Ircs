@@ -74,12 +74,12 @@ const styles = `${bgColors[color]} ${borderColors[color]} ${hoverEffects} border
 
 <div class={styles}>
   {title && (
-    <Heading level={titleLevel} size={titleSize} class="mb-2">
+    <Heading level={titleLevel} size={titleSize} align="center" class="mb-2">
       {title}
     </Heading>
   )}
   {description && (
-    <Text variant="body" color="muted" class="mb-4">
+    <Text variant="body" color="muted" align="center" class="mb-4">
       {description}
     </Text>
   )}
