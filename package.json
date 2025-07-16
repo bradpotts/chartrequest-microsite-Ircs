@@ -23,6 +23,7 @@
   "devDependencies": {
     "@tailwindcss/postcss": "^4.1.11",
     "autoprefixer": "^10.4.21",
+    "terser": "^5.43.1",
     "wrangler": "^4.24.4"
   }
 }
