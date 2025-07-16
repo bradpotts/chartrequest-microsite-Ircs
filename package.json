@@ -3,19 +3,26 @@
   "type": "module",
   "version": "0.0.1",
   "scripts": {
-    "dev": "astro dev --host 0.0.0.0",
+    "astro": "astro",
     "build": "astro build",
-    "preview": "astro preview",
-    "astro": "astro"
+    "cf-typegen": "wrangler types",
+    "check": "astro build && tsc && wrangler deploy --dry-run",
+    "deploy": "wrangler deploy",
+    "dev": "astro dev --host 0.0.0.0",
+    "format": "prettier --write .",
+    "preview": "astro build && wrangler dev"
   },
   "dependencies": {
     "@astrojs/cloudflare": "^12.6.0",
+    "@astrojs/sitemap": "^3.4.1",
     "@tailwindcss/vite": "^4.1.11",
     "astro": "^5.11.0",
-    "tailwindcss": "^4.1.11"
+    "tailwindcss": "^4.1.11",
+    "typescript": "^5.8.3"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.1.11",
-    "autoprefixer": "^10.4.21"
+    "autoprefixer": "^10.4.21",
+    "wrangler": "^4.24.4"
   }
 }
