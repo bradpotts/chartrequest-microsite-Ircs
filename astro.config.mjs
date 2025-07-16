@@ -14,6 +14,10 @@ export default defineConfig({
       enabled: true,
     }
   }),
+  build: {
+    assets: 'assets',
+    inlineStylesheets: 'auto',
+  },
   server: {
     host: '0.0.0.0',
     port: 4321

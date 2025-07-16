@@ -1,0 +1,6 @@
+/*
+  X-Content-Type-Options: nosniff
+
+# Ensure proper MIME types for CSS files
+*.css
+  Content-Type: text/css
