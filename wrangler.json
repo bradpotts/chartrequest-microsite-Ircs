@@ -14,6 +14,14 @@
   "vars": {
     "HUBSPOT_PORTAL_ID": "2247197",
     "HUBSPOT_FORM_ID": "d667f927-b676-4e35-9d45-2c112fe025fa",
-    "TURNSTILE_SITE_KEY": "0x4AAAAAABldTXFZ4U3vfXPt"
-  }
+    "TURNSTILE_SITE_KEY": "0x4AAAAAABldTXFZ4U3vfXPt",
+    "TURNSTILE_SECRET_KEY": "0x4AAAAAABldTcPjMzfdYDuxowrczlxnTc"
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "microsite-ircs",
+      "database_id": "af58f146-ee84-4c00-8fa5-ddf7f8d88ec0"
+    }
+  ]
 }
