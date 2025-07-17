@@ -1,54 +1,86 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
-import tailwindcss from '@tailwindcss/vite';
+
+// Core Integrations
 import cloudflare from '@astrojs/cloudflare';
 import sitemap from '@astrojs/sitemap';
 
-// Astro configuration
+// CSS Tooling
+import tailwindcss from '@tailwindcss/vite';
+import purgecss from 'astro-purgecss';
+
+// Asset Optimization
+import playformCompress from '@playform/compress';
+import compressor from 'astro-compressor';
+
+// SEO Tools
+import robotsTxt from 'astro-robots-txt';
+
 export default defineConfig({
+  // Site Configuration
   site: "https://informationreleasecertification.com",
-  output: 'static', // Static output for better microsite performance
-  integrations: [sitemap()],
+
+  // Integrations
+  integrations: [
+    // SEO Enhancements
+    sitemap(),
+    robotsTxt(),
+    
+    // CSS Optimization
+    purgecss({
+      // Remove unused CSS
+      content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
+    }),
+    
+    // Asset Compression & Optimization
+    playformCompress({
+      CSS: true,
+      HTML: true,
+      Image: true,
+      JavaScript: true,
+      JSON: true,
+      SVG: true,
+    }),
+    compressor(),
+  ],
+  
+  // Deployment
   adapter: cloudflare({
     platformProxy: {
       enabled: true,
     }
   }),
+  
+  // Build Configuration
   build: {
     assets: 'assets',
     inlineStylesheets: 'auto',
   },
+  
+  // Development Server
   server: {
     host: '0.0.0.0',
     port: 4321
   },
+  
+  // Navigation Optimization
   prefetch: {
     defaultStrategy: 'hover'
   },
-  vite: {
-    plugins: [tailwindcss()],
-    build: {
-      cssMinify: true,
-      minify: 'terser',
-      terserOptions: {
-        compress: true,
-        ecma: 2020,
-        keep_classnames: false,
-        keep_fnames: false
-      },
-      assetsInlineLimit: 4096, // Files smaller than this (in bytes) will be inlined
-      rollupOptions: {
-        output: {
-          manualChunks: undefined,
-          entryFileNames: 'entry.[hash].js',
-          chunkFileNames: 'chunks/[name].[hash].js',
-          assetFileNames: 'assets/[name].[hash][extname]'
-        }
+  
+  // Image Optimization
+  image: {
+    service: {
+      entrypoint: 'astro/assets/services/sharp',
+      config: {
+        format: ['webp', 'avif'],
+        quality: 80
       }
-    },
-    optimizeDeps: {
-      exclude: ['svgo'] // Prevents issues with SVG optimization
-    },
-    assetsInclude: ['**/*.svg', '**/*.png', '**/*.jpg', '**/*.jpeg', '**/*.gif', '**/*.webp']
+    }
+  },
+  
+  // Vite Configuration
+  vite: {
+    plugins: [tailwindcss()]
   }
 });

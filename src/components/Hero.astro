@@ -2,6 +2,7 @@
 // Hero component for IRCS Certification landing page
 import Heading from './ui/Heading.astro';
 import Text from './ui/Text.astro';
+import { Image } from 'astro:assets';
 ---
 
 <section class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen flex items-center px-5 sm:px-6 lg:px-8 py-5 sm:py-10 lg:py-20">
@@ -62,9 +63,12 @@ import Text from './ui/Text.astro';
 			<!-- Right Image -->
 			<div class="relative">
 				<div class="relative z-10">
-					<img 
+					<Image 
 						src="/images/ircs-image-hero.webp" 
-						alt="Healthcare professional holding IRCS certification" 
+						alt="Healthcare professional holding IRCS certification"
+						width={800}
+						height={600} 
+						loading="eager"
 						class="w-full h-auto rounded-2xl shadow-2xl"
 					/>
 				</div>

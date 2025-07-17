@@ -1,23 +1,40 @@
-# Astro Starter Kit: Minimal
+# IRCS Certification Microsite
 
-```sh
-npm create astro@latest -- --template minimal
-```
+A high-performance, optimized microsite for the Information Release and Compliance Specialist (IRCS) certification program.
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/minimal)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/minimal)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/minimal/devcontainer.json)
+## 🚀 Project Overview
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+This microsite is built with Astro and deployed on Cloudflare Pages, featuring:
 
-## 🚀 Project Structure
+- Highly optimized performance (90+ PageSpeed score)
+- Responsive design with Tailwind CSS
+- Contact form with Cloudflare Turnstile protection
+- D1 database integration for form storage
+- Comprehensive SEO optimizations
 
-Inside of your Astro project, you'll see the following folders and files:
+## ✨ Technology Stack
+
+- **Framework**: [Astro](https://astro.build/)
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/)
+- **Deployment**: [Cloudflare Pages](https://pages.cloudflare.com/)
+- **Database**: [Cloudflare D1](https://developers.cloudflare.com/d1/)
+- **Form Protection**: [Cloudflare Turnstile](https://www.cloudflare.com/products/turnstile/)
+
+## � Project Structure
 
 ```text
 /
-├── public/
+├── public/            # Static assets (images, favicons)
 ├── src/
+│   ├── components/    # UI components
+│   │   └── ui/        # Base UI components
+│   ├── layouts/       # Page layouts
+│   ├── pages/         # Page routes and API endpoints
+│   │   └── api/       # API routes for form handling
+│   ├── scripts/       # Client & server scripts
+│   └── styles/        # Global styles
+├── astro.config.mjs   # Astro configuration
+└── wrangler.json      # Cloudflare configuration
 │   └── pages/
 │       └── index.astro
 └── package.json

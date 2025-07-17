@@ -1,24 +1,31 @@
 {
-  "name": "microsite-lrcs",
+  "name": "microsite-ircs",
   "type": "module",
-  "version": "0.0.1",
+  "version": "0.1.0",
+  "description": "Information Release and Compliance Specialist Certification Microsite",
   "scripts": {
-    "astro": "astro",
+    "dev": "astro dev --host 0.0.0.0",
     "build": "astro build",
-    "cf-typegen": "wrangler types",
+    "preview": "astro build && wrangler dev",
     "check": "astro build && tsc && wrangler deploy --dry-run",
     "deploy": "wrangler deploy",
-    "dev": "astro dev --host 0.0.0.0",
+    "cf-typegen": "wrangler types",
     "format": "prettier --write .",
-    "preview": "astro build && wrangler dev"
+    "astro": "astro"
   },
   "dependencies": {
+    "astro": "^5.11.0",
+    "typescript": "^5.8.3",
     "@astrojs/cloudflare": "^12.6.0",
     "@astrojs/sitemap": "^3.4.1",
-    "@tailwindcss/vite": "^4.1.11",
-    "astro": "^5.11.0",
+    "astro-robots-txt": "^1.0.0",
     "tailwindcss": "^4.1.11",
-    "typescript": "^5.8.3"
+    "@tailwindcss/vite": "^4.1.11",
+    "astro-purgecss": "^5.3.0",
+    "purgecss": "^7.0.2",
+    "@playform/compress": "^0.2.0",
+    "astro-compressor": "^1.0.0",
+    "sharp": "^0.34.3"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.1.11",
