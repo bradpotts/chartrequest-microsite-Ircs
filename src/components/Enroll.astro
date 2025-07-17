@@ -20,7 +20,20 @@ import Text from './ui/Text.astro';
 
 		<!-- Enrollment Form -->
 		<Card color="gray" class="p-8 lg:p-12 bg-gray-100">
-			<form class="space-y-6">
+			<!-- Success message (hidden by default) -->
+			<div id="enrollment-success" class="hidden text-center py-8">
+				<div class="bg-green-100 text-green-800 p-6 rounded-lg mb-6">
+					<svg class="w-12 h-12 text-green-600 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+					</svg>
+					<h3 class="text-xl font-bold mb-2">Enrollment Successful!</h3>
+					<p class="mb-4">Thank you for enrolling in the IRCS Certification program.</p>
+					<p>You will receive an email with access instructions within 24 hours.</p>
+				</div>
+			</div>
+			
+			<form id="hubspot-direct-form" class="space-y-6">
+				<!-- Name and Email Row -->
 				<!-- Name and Email Row -->
 				<div class="grid md:grid-cols-2 gap-6">
 					<div>
@@ -50,36 +63,35 @@ import Text from './ui/Text.astro';
 						>
 					</div>
 				</div>
-
-				<!-- Phone and Organization Row -->
-				<div class="grid md:grid-cols-2 gap-6">
-					<div>
-						<label for="phone" class="block text-sm font-semibold text-gray-900 mb-2">
-							Phone Number
-						</label>
-						<input 
-							type="tel" 
-							id="phone" 
-							name="phone" 
-							placeholder="Required"
-							required
-							class="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-colors"
-						>
-					</div>
-					<div>
-						<label for="organization" class="block text-sm font-semibold text-gray-900 mb-2">
-							Organization/Company
-						</label>
-						<input 
-							type="text" 
-							id="organization" 
-							name="organization" 
-							placeholder="Optional"
-							class="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-colors"
-						>
-					</div>
+				
+				<!-- Phone Row -->
+				<div>
+					<label for="phone" class="block text-sm font-semibold text-gray-900 mb-2">
+						Phone Number
+					</label>
+					<input 
+						type="tel" 
+						id="phone" 
+						name="phone" 
+						placeholder="Optional"
+						class="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-colors"
+					>
 				</div>
-
+				
+				<!-- Company Row -->
+				<div>
+					<label for="company" class="block text-sm font-semibold text-gray-900 mb-2">
+						Company / Organization
+					</label>
+					<input 
+						type="text" 
+						id="company" 
+						name="company" 
+						placeholder="Optional"
+						class="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-colors"
+					>
+				</div>
+				
 				<!-- Job Title -->
 				<div>
 					<label for="jobTitle" class="block text-sm font-semibold text-gray-900 mb-2">
@@ -93,23 +105,8 @@ import Text from './ui/Text.astro';
 						class="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-colors"
 					>
 				</div>
-
-				<!-- Payment Information -->
-				<div>
-					<label for="payment" class="block text-sm font-semibold text-gray-900 mb-2">
-						Payment Information
-					</label>
-					<input 
-						type="text" 
-						id="payment" 
-						name="payment" 
-						placeholder="Required"
-						required
-						class="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-colors"
-					>
-				</div>
-
-				<!-- Enrollment Summary -->
+				
+				<!-- Enrollment Summary Card -->
 				<Card color="white" class="p-6">
 					<h3 class="text-lg font-bold text-gray-900 mb-4 text-center">Enrollment Summary</h3>
 					
@@ -121,21 +118,95 @@ import Text from './ui/Text.astro';
 					<div class="text-center text-sm text-gray-800 mb-6">
 						<p>Secure payment processing • Valid for 2 years • 30-day money-back guarantee</p>
 					</div>
-					
-					<!-- Submit Button -->
-					<button 
-						type="submit"
-						class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-4 px-8 rounded-full transition-all duration-200 text-lg shadow-sm hover:shadow-md hover:-translate-y-0.5"
-					>
-						Complete Enrollment
-					</button>
 				</Card>
-
+				
+				<!-- Payment Information -->
+				<div class="space-y-4">
+					<h3 class="text-lg font-semibold text-gray-900">Payment Information</h3>
+					
+					<!-- Card Number -->
+					<div>
+						<label for="cardNumber" class="block text-sm font-semibold text-gray-900 mb-2">
+							Card Number
+						</label>
+						<input 
+							type="text" 
+							id="cardNumber" 
+							name="cardNumber" 
+							placeholder="1234 5678 9012 3456"
+							required
+							class="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-colors"
+						>
+					</div>
+					
+					<!-- Expiration and CVV -->
+					<div class="grid grid-cols-2 gap-6">
+						<div>
+							<label for="expiration" class="block text-sm font-semibold text-gray-900 mb-2">
+								Expiration Date
+							</label>
+							<input 
+								type="text" 
+								id="expiration" 
+								name="expiration" 
+								placeholder="MM/YY"
+								required
+								class="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-colors"
+							>
+						</div>
+						<div>
+							<label for="cvv" class="block text-sm font-semibold text-gray-900 mb-2">
+								Security Code (CVV)
+							</label>
+							<input 
+								type="text" 
+								id="cvv" 
+								name="cvv" 
+								placeholder="123"
+								required
+								class="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-colors"
+							>
+						</div>
+					</div>
+				</div>
+				
+				<!-- Form Error Message (hidden by default) -->
+				<div id="form-error" class="hidden text-red-600 bg-red-50 p-3 rounded-lg">
+					<p id="error-message">An error occurred. Please try again.</p>
+				</div>
+				
 				<!-- Terms and Privacy -->
 				<div class="text-center text-sm text-gray-800">
 					<p>By enrolling, you agree to our <a href="#" class="text-blue-600 hover:text-blue-700">terms of service</a> and <a href="#" class="text-blue-600 hover:text-blue-700">privacy policy</a></p>
 				</div>
+				
+				<!-- Submit Button -->
+				<div>
+					<button 
+						type="submit" 
+						id="submit-button"
+						class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-4 px-8 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 text-lg"
+					>
+						<span id="button-text">Complete Enrollment</span>
+						<span id="button-loading" class="hidden">
+							<svg class="animate-spin -ml-1 mr-2 h-5 w-5 text-white inline-block" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+								<circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+								<path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+							</svg>
+							Processing...
+						</span>
+					</button>
+				</div>
 			</form>
 		</Card>
+
+		<script>
+			// Import the form handler from our TypeScript module
+			import { initializeHubSpotForm } from '../scripts/hubspot-form';
+			
+			// Initialize the form handling
+			initializeHubSpotForm();
+		</script>
+
 	</div>
 </Section>
