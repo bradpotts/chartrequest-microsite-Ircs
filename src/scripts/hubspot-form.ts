@@ -42,10 +42,10 @@ export interface HubSpotErrorResponse {
   errors: Array<{message: string}>;
 }
 
-const HUBSPOT_PORTAL_ID = "HOTSPOT_PORTAL_ID";
-const HUBSPOT_FORM_ID = "HOTSPOT_FORM_ID";
+const HUBSPOT_PORTAL_ID = import.meta.env.HOTSPOT_PORTAL_ID;
+const HUBSPOT_FORM_ID = import.meta.env.HOTSPOT_FORM_ID;
 const HUBSPOT_API_URL = `https://api.hsforms.com/submissions/v3/integration/submit/${HUBSPOT_PORTAL_ID}/${HUBSPOT_FORM_ID}`;
-const RECAPTCHA_SITE_KEY = "GOOGLE_RECAPTCHA_SITE_KEY";
+const RECAPTCHA_SITE_KEY = import.meta.env.GOOGLE_RECAPTCHA_SITE_KEY;
 
 async function getRecaptchaToken(): Promise<string> {
   if (!window.grecaptcha || !window.grecaptcha.execute) {
