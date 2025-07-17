@@ -10,5 +10,10 @@
   "observability": {
     "enabled": true
   },
-  "upload_source_maps": true
+  "upload_source_maps": true,
+  "vars": {
+    "HUBSPOT_PORTAL_ID": "2247197",
+    "HUBSPOT_FORM_ID": "d667f927-b676-4e35-9d45-2c112fe025fa",
+    "TURNSTILE_SITE_KEY": "0x4AAAAAABldTXFZ4U3vfXPt"
+  }
 }

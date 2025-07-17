@@ -1,10 +1,24 @@
 declare global {
   interface Window {
-    grecaptcha: {
-      ready: (callback: () => void) => void;
-      execute: (siteKey: string, options: { action: string }) => Promise<string>;
+    turnstile: {
+      render: (container: string | HTMLElement, options: TurnstileOptions) => string;
+      reset: (widgetId: string) => void;
+      remove: (widgetId: string) => void;
     };
   }
+}
+
+interface TurnstileOptions {
+  sitekey: string;
+  callback?: (token: string) => void;
+  'expired-callback'?: () => void;
+  'error-callback'?: (error: any) => void;
+  theme?: 'light' | 'dark' | 'auto';
+  tabindex?: number;
+  'response-field'?: boolean;
+  'response-field-name'?: string;
+  size?: 'normal' | 'compact';
+  appearance?: 'always' | 'interaction-only' | 'execute';
 }
 
 export interface HubSpotField {
@@ -32,7 +46,8 @@ export interface HubSpotPayload {
       }[];
     };
   };
-  recaptchaToken?: string;
+  // Cloudflare Turnstile token is sent through a custom field
+  fields_turnstile?: { name: string; value: string }[];
 }
 
 export interface HubSpotErrorResponse {
@@ -42,22 +57,53 @@ export interface HubSpotErrorResponse {
   errors: Array<{message: string}>;
 }
 
-const HUBSPOT_PORTAL_ID = import.meta.env.HOTSPOT_PORTAL_ID;
-const HUBSPOT_FORM_ID = import.meta.env.HOTSPOT_FORM_ID;
+const HUBSPOT_PORTAL_ID = import.meta.env.HUBSPOT_PORTAL_ID;
+const HUBSPOT_FORM_ID = import.meta.env.HUBSPOT_FORM_ID;
 const HUBSPOT_API_URL = `https://api.hsforms.com/submissions/v3/integration/submit/${HUBSPOT_PORTAL_ID}/${HUBSPOT_FORM_ID}`;
-const RECAPTCHA_SITE_KEY = import.meta.env.GOOGLE_RECAPTCHA_SITE_KEY;
+const TURNSTILE_SITE_KEY = import.meta.env.TURNSTILE_SITE_KEY;
 
-async function getRecaptchaToken(): Promise<string> {
-  if (!window.grecaptcha || !window.grecaptcha.execute) {
-    throw new Error("reCAPTCHA not loaded");
-  }
-  
-  try {
-    return await window.grecaptcha.execute(RECAPTCHA_SITE_KEY, { action: 'submit_form' });
-  } catch (error) {
-    console.error("reCAPTCHA error:", error);
-    throw new Error("Failed to verify reCAPTCHA");
-  }
+// We'll use this variable to store the Turnstile widget ID
+let turnstileWidgetId: string | null = null;
+
+// Function to get Turnstile token
+function getTurnstileToken(): Promise<string> {
+  return new Promise((resolve, reject) => {
+    if (!window.turnstile) {
+      console.error("Turnstile not loaded");
+      reject(new Error("Turnstile not loaded"));
+      return;
+    }
+
+    // Create container for Turnstile if it doesn't exist
+    let container = document.getElementById("turnstile-container");
+    if (!container) {
+      container = document.createElement("div");
+      container.id = "turnstile-container";
+      container.style.display = "none"; // Hidden container for invisible widget
+      document.body.appendChild(container);
+    }
+
+    // Reset any existing widget
+    if (turnstileWidgetId) {
+      window.turnstile.reset(turnstileWidgetId);
+    }
+
+    // Render a new widget
+    turnstileWidgetId = window.turnstile.render(container, {
+      sitekey: TURNSTILE_SITE_KEY,
+      callback: (token) => {
+        resolve(token);
+      },
+      'error-callback': () => {
+        reject(new Error("Failed to verify with Turnstile"));
+      },
+      'expired-callback': () => {
+        reject(new Error("Turnstile verification expired"));
+      },
+      size: 'compact',
+      appearance: 'interaction-only'  // More invisible than 'always'
+    });
+  });
 }
 
 function getHubSpotCookie(): string | undefined {
@@ -73,7 +119,8 @@ export async function submitToHubSpot(formData: FormData): Promise<Response> {
   const company = formData.get("company")?.toString() || "";
   const jobTitle = formData.get("jobTitle")?.toString() || "";
   
-  const recaptchaToken = await getRecaptchaToken();
+  // Get Cloudflare Turnstile token
+  const turnstileToken = await getTurnstileToken();
   
   const nameParts = fullName.split(" ");
   const firstName = nameParts[0];
@@ -98,7 +145,9 @@ export async function submitToHubSpot(formData: FormData): Promise<Response> {
       pageName: document.title,
       hutk: hutk
     },
-    recaptchaToken: recaptchaToken,
+    fields_turnstile: [
+      { name: "cf-turnstile-response", value: turnstileToken }
+    ],
     legalConsentOptions: {
       consent: {
         consentToProcess: true,
@@ -123,26 +172,25 @@ export async function submitToHubSpot(formData: FormData): Promise<Response> {
   });
 }
 
-function loadRecaptcha(): Promise<void> {
+function loadTurnstile(): Promise<void> {
   return new Promise((resolve, reject) => {
-    if (window.grecaptcha) {
+    if (window.turnstile) {
       resolve();
       return;
     }
 
     const script = document.createElement('script');
-    script.src = `https://www.google.com/recaptcha/api.js?render=${RECAPTCHA_SITE_KEY}`;
+    script.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js';
     script.async = true;
     script.defer = true;
     
     script.onload = () => {
-      window.grecaptcha.ready(() => {
-        resolve();
-      });
+      // Turnstile is ready immediately after loading
+      resolve();
     };
     
     script.onerror = () => {
-      reject(new Error('Failed to load reCAPTCHA'));
+      reject(new Error('Failed to load Turnstile'));
     };
     
     document.head.appendChild(script);
@@ -152,9 +200,9 @@ function loadRecaptcha(): Promise<void> {
 export function initializeHubSpotForm(): void {
   document.addEventListener('DOMContentLoaded', async () => {
     try {
-      await loadRecaptcha();
+      await loadTurnstile();
     } catch (error) {
-      console.error('Failed to load reCAPTCHA:', error);
+      console.error('Failed to load Turnstile:', error);
     }
     
     const form = document.getElementById("hubspot-direct-form") as HTMLFormElement;
