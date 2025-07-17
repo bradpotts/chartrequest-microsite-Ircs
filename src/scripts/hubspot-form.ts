@@ -57,10 +57,16 @@ export interface HubSpotErrorResponse {
   errors: Array<{message: string}>;
 }
 
-const HUBSPOT_PORTAL_ID = import.meta.env.HUBSPOT_PORTAL_ID;
-const HUBSPOT_FORM_ID = import.meta.env.HUBSPOT_FORM_ID;
+// Hardcoded values as fallbacks in case environment variables are not available
+const FALLBACK_PORTAL_ID = "2247197";
+const FALLBACK_FORM_ID = "d667f927-b676-4e35-9d45-2c112fe025fa";
+const FALLBACK_TURNSTILE_SITE_KEY = "0x4AAAAAABldTXFZ4U3vfXPt";
+
+// Try to get from environment variables first, fallback to hardcoded values if needed
+const HUBSPOT_PORTAL_ID = import.meta.env.HUBSPOT_PORTAL_ID || FALLBACK_PORTAL_ID;
+const HUBSPOT_FORM_ID = import.meta.env.HUBSPOT_FORM_ID || FALLBACK_FORM_ID;
 const HUBSPOT_API_URL = `https://api.hsforms.com/submissions/v3/integration/submit/${HUBSPOT_PORTAL_ID}/${HUBSPOT_FORM_ID}`;
-const TURNSTILE_SITE_KEY = import.meta.env.TURNSTILE_SITE_KEY;
+const TURNSTILE_SITE_KEY = import.meta.env.TURNSTILE_SITE_KEY || FALLBACK_TURNSTILE_SITE_KEY;
 
 // We'll use this variable to store the Turnstile widget ID
 let turnstileWidgetId: string | null = null;
@@ -88,21 +94,38 @@ function getTurnstileToken(): Promise<string> {
       window.turnstile.reset(turnstileWidgetId);
     }
 
+    // Debug logging
+    console.log("Using Turnstile site key:", TURNSTILE_SITE_KEY);
+    
+    if (!TURNSTILE_SITE_KEY) {
+      console.error("Turnstile site key is undefined!");
+      reject(new Error("Turnstile site key is missing"));
+      return;
+    }
+
     // Render a new widget
-    turnstileWidgetId = window.turnstile.render(container, {
-      sitekey: TURNSTILE_SITE_KEY,
-      callback: (token) => {
-        resolve(token);
-      },
-      'error-callback': () => {
-        reject(new Error("Failed to verify with Turnstile"));
-      },
-      'expired-callback': () => {
-        reject(new Error("Turnstile verification expired"));
-      },
-      size: 'compact',
-      appearance: 'interaction-only'  // More invisible than 'always'
-    });
+    try {
+      turnstileWidgetId = window.turnstile.render(container, {
+        sitekey: TURNSTILE_SITE_KEY,
+        callback: (token) => {
+          console.log("Turnstile token obtained successfully");
+          resolve(token);
+        },
+        'error-callback': (error) => {
+          console.error("Turnstile error:", error);
+          reject(new Error("Failed to verify with Turnstile"));
+        },
+        'expired-callback': () => {
+          console.warn("Turnstile verification expired");
+          reject(new Error("Turnstile verification expired"));
+        },
+        size: 'compact',
+        appearance: 'interaction-only'  // More invisible than 'always'
+      });
+    } catch (error) {
+      console.error("Error rendering Turnstile:", error);
+      reject(error);
+    }
   });
 }
 
@@ -174,7 +197,10 @@ export async function submitToHubSpot(formData: FormData): Promise<Response> {
 
 function loadTurnstile(): Promise<void> {
   return new Promise((resolve, reject) => {
+    console.log("Attempting to load Turnstile...");
+    
     if (window.turnstile) {
+      console.log("Turnstile already loaded");
       resolve();
       return;
     }
@@ -184,12 +210,23 @@ function loadTurnstile(): Promise<void> {
     script.async = true;
     script.defer = true;
     
+    console.log("Adding Turnstile script to document head");
+    
     script.onload = () => {
-      // Turnstile is ready immediately after loading
-      resolve();
+      console.log("Turnstile script loaded successfully");
+      
+      // Check if turnstile object is available
+      if (window.turnstile) {
+        console.log("Turnstile object is available");
+        resolve();
+      } else {
+        console.error("Turnstile script loaded but window.turnstile is not defined");
+        reject(new Error('Turnstile loaded but object not available'));
+      }
     };
     
-    script.onerror = () => {
+    script.onerror = (error) => {
+      console.error("Failed to load Turnstile script:", error);
       reject(new Error('Failed to load Turnstile'));
     };
     
