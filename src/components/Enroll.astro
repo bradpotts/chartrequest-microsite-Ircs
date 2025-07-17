@@ -1,5 +1,4 @@
 ---
-// Enroll component for IRCS Certification enrollment form
 import Section from './ui/Section.astro';
 import Card from './ui/Card.astro';
 import Heading from './ui/Heading.astro';
@@ -8,7 +7,6 @@ import Text from './ui/Text.astro';
 
 <Section background="white" id="enroll">
 	<div class="max-w-4xl mx-auto">
-		<!-- Section Header -->
 		<div class="text-center mb-16">
 			<Heading level="2" size="lg" align="center" color="primary" class="font-bold mb-4">
 				Enroll in <span class="text-blue-600">IRCS Certification</span>
@@ -18,9 +16,7 @@ import Text from './ui/Text.astro';
 			</Text>
 		</div>
 
-		<!-- Enrollment Form -->
 		<Card color="gray" class="p-8 lg:p-12 bg-gray-100">
-			<!-- Success message (hidden by default) -->
 			<div id="enrollment-success" class="hidden text-center py-8">
 				<div class="bg-green-100 text-green-800 p-6 rounded-lg mb-6">
 					<svg class="w-12 h-12 text-green-600 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -33,8 +29,6 @@ import Text from './ui/Text.astro';
 			</div>
 			
 			<form id="hubspot-direct-form" class="space-y-6">
-				<!-- Name and Email Row -->
-				<!-- Name and Email Row -->
 				<div class="grid md:grid-cols-2 gap-6">
 					<div>
 						<label for="fullName" class="block text-sm font-semibold text-gray-900 mb-2">
@@ -64,7 +58,6 @@ import Text from './ui/Text.astro';
 					</div>
 				</div>
 				
-				<!-- Phone Row -->
 				<div>
 					<label for="phone" class="block text-sm font-semibold text-gray-900 mb-2">
 						Phone Number
@@ -78,7 +71,6 @@ import Text from './ui/Text.astro';
 					>
 				</div>
 				
-				<!-- Company Row -->
 				<div>
 					<label for="company" class="block text-sm font-semibold text-gray-900 mb-2">
 						Company / Organization
@@ -92,7 +84,6 @@ import Text from './ui/Text.astro';
 					>
 				</div>
 				
-				<!-- Job Title -->
 				<div>
 					<label for="jobTitle" class="block text-sm font-semibold text-gray-900 mb-2">
 						Job Title
@@ -106,81 +97,24 @@ import Text from './ui/Text.astro';
 					>
 				</div>
 				
-				<!-- Enrollment Summary Card -->
 				<Card color="white" class="p-6">
-					<h3 class="text-lg font-bold text-gray-900 mb-4 text-center">Enrollment Summary</h3>
-					
-					<div class="flex justify-between items-center mb-4">
-						<span class="text-gray-800">IRCS Certification Program</span>
-						<span class="text-2xl font-bold text-blue-600">$495</span>
-					</div>
+					<h3 class="text-lg font-bold text-gray-900 mb-4 text-center">IRCS Certification</h3>
 					
 					<div class="text-center text-sm text-gray-800 mb-6">
-						<p>Secure payment processing • Valid for 2 years • 30-day money-back guarantee</p>
+						<p>Complete your information above to enroll in the IRCS Certification program.</p>
+						<p class="mt-2">You will receive access instructions via email within 24 hours.</p>
 					</div>
 				</Card>
 				
-				<!-- Payment Information -->
-				<div class="space-y-4">
-					<h3 class="text-lg font-semibold text-gray-900">Payment Information</h3>
-					
-					<!-- Card Number -->
-					<div>
-						<label for="cardNumber" class="block text-sm font-semibold text-gray-900 mb-2">
-							Card Number
-						</label>
-						<input 
-							type="text" 
-							id="cardNumber" 
-							name="cardNumber" 
-							placeholder="1234 5678 9012 3456"
-							required
-							class="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-colors"
-						>
-					</div>
-					
-					<!-- Expiration and CVV -->
-					<div class="grid grid-cols-2 gap-6">
-						<div>
-							<label for="expiration" class="block text-sm font-semibold text-gray-900 mb-2">
-								Expiration Date
-							</label>
-							<input 
-								type="text" 
-								id="expiration" 
-								name="expiration" 
-								placeholder="MM/YY"
-								required
-								class="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-colors"
-							>
-						</div>
-						<div>
-							<label for="cvv" class="block text-sm font-semibold text-gray-900 mb-2">
-								Security Code (CVV)
-							</label>
-							<input 
-								type="text" 
-								id="cvv" 
-								name="cvv" 
-								placeholder="123"
-								required
-								class="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-colors"
-							>
-						</div>
-					</div>
-				</div>
-				
-				<!-- Form Error Message (hidden by default) -->
 				<div id="form-error" class="hidden text-red-600 bg-red-50 p-3 rounded-lg">
 					<p id="error-message">An error occurred. Please try again.</p>
 				</div>
 				
-				<!-- Terms and Privacy -->
-				<div class="text-center text-sm text-gray-800">
+				<div class="text-center text-sm text-gray-800 space-y-2">
 					<p>By enrolling, you agree to our <a href="#" class="text-blue-600 hover:text-blue-700">terms of service</a> and <a href="#" class="text-blue-600 hover:text-blue-700">privacy policy</a></p>
+					<p class="text-xs text-gray-600">This form is protected by reCAPTCHA and the Google <a href="https://policies.google.com/privacy" target="_blank" class="text-blue-600 hover:text-blue-700">Privacy Policy</a> and <a href="https://policies.google.com/terms" target="_blank" class="text-blue-600 hover:text-blue-700">Terms of Service</a> apply.</p>
 				</div>
 				
-				<!-- Submit Button -->
 				<div>
 					<button 
 						type="submit" 
