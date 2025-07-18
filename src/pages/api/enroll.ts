@@ -1,83 +1,62 @@
 /**
- * Enrollment API endpoint - Step 2: Add validation and proper interfaces
+ * Enrollment form API endpoint - Simple modular approach
  */
-import type { EnrollmentFormData } from '../../scripts/form-enroll-database';
+import type { AstroAPIContext } from '../../scripts/form-common-api-handler';
+import { createSuccessResponse, createErrorResponse, getClientIp } from '../../scripts/form-common-api-handler';
+import { validateEnrollmentData, saveEnrollmentToDatabase } from '../../scripts/form-enroll-database';
+import { validateEnrollFormTurnstile } from '../../scripts/form-enroll-turnstile';
+import { submitToHubSpot } from '../../scripts/form-enroll-hubspot';
 
-export async function POST({ request }: { request: Request }): Promise<Response> {
+export async function POST({ request, env, clientAddress }: AstroAPIContext): Promise<Response> {
   try {
-    console.log('=== API ENDPOINT CALLED ===');
-    
-    // Test form data parsing
     const formData = await request.formData();
-    console.log('Form data parsed successfully');
+    const ip = getClientIp(request, clientAddress);
     
-    // Extract all form fields
-    const fullName = formData.get("fullName")?.toString() || "";
-    const email = formData.get("email")?.toString() || "";
-    const phone = formData.get("phone")?.toString() || "";
-    const company = formData.get("company")?.toString() || "";
-    const jobTitle = formData.get("jobTitle")?.toString() || "";
-    const experience = formData.get("experience")?.toString() || "";
-    const motivation = formData.get("motivation")?.toString() || "";
+    console.log('=== ENROLLMENT SUBMISSION ===');
+    
+    // Extract enrollment data
+    const enrollmentData = {
+      fullName: formData.get("fullName")?.toString() || "",
+      email: formData.get("email")?.toString() || "",
+      organization: formData.get("company")?.toString(),
+      title: formData.get("jobTitle")?.toString(),
+      phone: formData.get("phone")?.toString(),
+      howHeard: formData.get("experience")?.toString() || "",
+      comments: formData.get("motivation")?.toString() || ""
+    };
+    
     const cfTurnstileResponse = formData.get("cf-turnstile-response")?.toString() || "";
     
-    console.log('Full Name:', fullName);
-    console.log('Email:', email);
-    console.log('Phone:', phone);
-    console.log('Company:', company);
-    console.log('Job Title:', jobTitle);
-    console.log('Experience:', experience);
-    console.log('Motivation:', motivation);
-    console.log('Turnstile Token Present:', cfTurnstileResponse ? 'Yes' : 'No');
-    
-    // Basic validation
-    const errors: string[] = [];
-    if (!fullName.trim()) errors.push('Full name is required');
-    if (!email.trim()) errors.push('Email is required');
-    if (!email.includes('@')) errors.push('Valid email is required');
-    if (!cfTurnstileResponse) errors.push('Security verification is required');
-    
-    if (errors.length > 0) {
-      console.log('Validation errors:', errors);
-      return new Response(JSON.stringify({
-        success: false,
-        message: "Validation failed",
-        errors: errors
-      }), {
-        status: 400,
-        headers: { 'Content-Type': 'application/json' }
-      });
+    // 1. Validate data
+    const validationResult = validateEnrollmentData(enrollmentData);
+    if (!validationResult.valid) {
+      return createErrorResponse(validationResult.message || "Validation failed", 400);
     }
     
-    console.log('Validation passed');
+    // 2. Validate Turnstile
+    const turnstileValid = await validateEnrollFormTurnstile(cfTurnstileResponse, ip, env);
+    if (!turnstileValid) {
+      return createErrorResponse("Security verification failed", 400);
+    }
     
-    return new Response(JSON.stringify({
-      success: true,
-      message: "All form data extraction and validation works",
-      data: { 
-        fullName, 
-        email, 
-        phone, 
-        company, 
-        jobTitle, 
-        experience, 
-        motivation,
-        hasTurnstileToken: !!cfTurnstileResponse
-      }
-    }), {
-      status: 200,
-      headers: { 'Content-Type': 'application/json' }
-    });
+    // 3. Submit to HubSpot 
+    try {
+      const pageUri = new URL(request.url).origin;
+      await submitToHubSpot(enrollmentData, env, pageUri);
+    } catch (error) {
+      console.error('HubSpot submission failed:', error);
+    }
+    
+    // 4. Save to database
+    const saved = await saveEnrollmentToDatabase(enrollmentData, env);
+    if (!saved) {
+      return createErrorResponse("Failed to save enrollment", 500);
+    }
+    
+    return createSuccessResponse("Enrollment submitted successfully");
+    
   } catch (error) {
-    console.error('API error:', error);
-    
-    return new Response(JSON.stringify({
-      success: false,
-      message: "API failed",
-      error: String(error)
-    }), {
-      status: 500,
-      headers: { 'Content-Type': 'application/json' }
-    });
+    console.error('Enrollment error:', error);
+    return createErrorResponse("Enrollment failed", 500);
   }
 }
