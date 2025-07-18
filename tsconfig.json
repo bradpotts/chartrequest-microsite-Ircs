@@ -3,6 +3,9 @@
   "include": [".astro/types.d.ts", "**/*"],
   "exclude": ["dist"],
   "compilerOptions": {
-    "strictNullChecks": true
+    "strictNullChecks": true,
+    "target": "ES2020",
+    "lib": ["ES2020", "DOM"],
+    "module": "ESNext"
   }
 }
