@@ -8,9 +8,13 @@ import type { D1Database } from '@cloudflare/workers-types';
  */
 export interface Env {
   // D1 database binding
+  // DB name: microsite-ircs
+  // DB ID: af58f146-ee84-4c00-8fa5-ddf7f8d88ec0
   DB: D1Database;
   
   // API keys and secrets
+  // Contact Form: turnstile_name: microsite-ircs-form-contact, turnstile_id: 0x4AAAAAABlkmjZZRT8r9BHM
+  // Enrollment Form: turnstile_name: microsite-ircs-form-enrollment, turnstile_id: 0x4AAAAAABldTXFZ4U3vfXPt
   TURNSTILE_SITE_KEY: string;
   TURNSTILE_SECRET_KEY: string;
   HUBSPOT_PORTAL_ID: string;

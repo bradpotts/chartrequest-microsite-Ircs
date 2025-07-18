@@ -14,6 +14,7 @@ export interface TurnstileOptions {
   'response-field-name'?: string;
   size?: 'normal' | 'compact';
   appearance?: 'always' | 'interaction-only' | 'execute';
+  action?: string; // Action name for analytics
 }
 
 export interface TurnstileVerifyResponse {

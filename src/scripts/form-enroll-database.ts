@@ -8,12 +8,11 @@ import type { Env } from './form-common-api-handler';
  * Enrollment form data structure
  */
 export interface EnrollmentFormData {
-  firstName: string;
-  lastName: string;
+  fullName: string;
   email: string;
-  phone?: string;
   organization?: string;
-  position?: string;
+  title?: string;
+  phone?: string;
   howHeard?: string;
   comments?: string;
 }
@@ -31,22 +30,20 @@ export async function saveEnrollmentToDatabase(data: EnrollmentFormData, env: En
     // Insert the enrollment data into the D1 database
     await env.DB.prepare(`
       INSERT INTO form_enrollment (
-        enrollment_first_name,
-        enrollment_last_name,
+        enrollment_full_name,
         enrollment_email,
-        enrollment_phone,
         enrollment_organization,
-        enrollment_position,
+        enrollment_title,
+        enrollment_phone,
         enrollment_how_heard,
         enrollment_comments
-      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+      ) VALUES (?, ?, ?, ?, ?, ?, ?)
     `).bind(
-      data.firstName,
-      data.lastName,
+      data.fullName,
       data.email,
-      data.phone || "",
       data.organization || "",
-      data.position || "",
+      data.title || "",
+      data.phone || "",
       data.howHeard || "",
       data.comments || ""
     ).run();
@@ -65,12 +62,8 @@ export async function saveEnrollmentToDatabase(data: EnrollmentFormData, env: En
 export function validateEnrollmentData(
   data: Partial<EnrollmentFormData>
 ): { valid: boolean; message?: string } {
-  if (!data.firstName || data.firstName.trim() === '') {
-    return { valid: false, message: "First name is required" };
-  }
-  
-  if (!data.lastName || data.lastName.trim() === '') {
-    return { valid: false, message: "Last name is required" };
+  if (!data.fullName || data.fullName.trim() === '') {
+    return { valid: false, message: "Full name is required" };
   }
   
   if (!data.email || data.email.trim() === '') {

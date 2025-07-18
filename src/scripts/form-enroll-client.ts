@@ -39,7 +39,24 @@ export function setupEnrollFormSubmission(): void {
         body: formData
       });
       
-      const result = await response.json() as { success: boolean; message: string };
+      let result;
+      
+      try {
+        // Check if the response has content before trying to parse it
+        const text = await response.text();
+        
+        if (text.trim()) {
+          // Only try to parse as JSON if there's actual content
+          result = JSON.parse(text) as { success: boolean; message: string };
+        } else {
+          // Handle empty response
+          result = { success: response.ok, message: response.ok ? 'Enrollment successful!' : 'Empty response from server' };
+        }
+      } catch (parseError) {
+        // Handle JSON parse error
+        console.error('Error parsing JSON response:', parseError);
+        result = { success: false, message: 'Invalid response format from server' };
+      }
       
       if (response.ok && result.success) {
         // Show success message and reset form

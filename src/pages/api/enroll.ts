@@ -17,14 +17,13 @@ export async function POST({ request, env, clientAddress }: AstroAPIContext): Pr
     
     // Extract form fields
     const enrollmentData = {
-      firstName: formData.get("firstName")?.toString() || "",
-      lastName: formData.get("lastName")?.toString() || "",
+      fullName: formData.get("fullName")?.toString() || "",
       email: formData.get("email")?.toString() || "",
+      organization: formData.get("company")?.toString(), // Form uses 'company' instead of 'organization'
+      title: formData.get("jobTitle")?.toString(), // Form uses 'jobTitle' instead of 'title'
       phone: formData.get("phone")?.toString(),
-      organization: formData.get("organization")?.toString(),
-      position: formData.get("position")?.toString(),
-      howHeard: formData.get("howHeard")?.toString(),
-      comments: formData.get("comments")?.toString()
+      howHeard: formData.get("howHeard")?.toString() || "",
+      comments: formData.get("comments")?.toString() || ""
     };
     
     // Validate form data

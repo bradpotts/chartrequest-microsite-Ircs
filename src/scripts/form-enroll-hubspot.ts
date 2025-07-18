@@ -35,15 +35,20 @@ export interface HubSpotPayload {
  * Map enrollment form data to HubSpot fields
  */
 function mapEnrollmentToHubSpot(data: EnrollmentFormData, pageUri: string): HubSpotPayload {
+  // Split fullName into first and last name for HubSpot
+  const nameParts = data.fullName ? data.fullName.split(' ') : ['', ''];
+  const firstName = nameParts[0] || '';
+  const lastName = nameParts.length > 1 ? nameParts.slice(1).join(' ') : '';
+  
   return {
     submittedAt: Date.now(),
     fields: [
-      { name: "firstname", value: data.firstName },
-      { name: "lastname", value: data.lastName },
+      { name: "firstname", value: firstName },
+      { name: "lastname", value: lastName },
       { name: "email", value: data.email },
       { name: "phone", value: data.phone },
       { name: "company", value: data.organization },
-      { name: "jobtitle", value: data.position },
+      { name: "jobtitle", value: data.title },
       { name: "how_did_you_hear_about_us", value: data.howHeard },
       { name: "message", value: data.comments }
     ].filter(field => field.value !== null && field.value !== undefined),

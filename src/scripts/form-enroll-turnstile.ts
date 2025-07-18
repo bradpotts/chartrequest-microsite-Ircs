@@ -14,14 +14,30 @@ export function initEnrollFormTurnstile(): void {
   document.addEventListener('DOMContentLoaded', () => {
     const turnstileContainer = document.querySelector('#enroll-turnstile') as HTMLElement;
     if (turnstileContainer && window.turnstile) {
-      // Site key from environment or fallback
+      // Site key from environment or fallback - using the correct site key
       const siteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || '0x4AAAAAABldTXFZ4U3vfXPt';
       
       try {
-        window.turnstile.render(turnstileContainer, {
+        const widgetId = window.turnstile.render(turnstileContainer, {
           sitekey: siteKey,
           theme: 'light',
-          size: 'normal'
+          size: 'normal',
+          action: 'microsite-ircs-form-enrollment',
+          callback: (token: string) => {
+            // Store token in hidden field
+            let tokenField = document.getElementById('cf-turnstile-response-enroll') as HTMLInputElement;
+            
+            if (!tokenField) {
+              // Create hidden field if it doesn't exist
+              tokenField = document.createElement('input');
+              tokenField.type = 'hidden';
+              tokenField.id = 'cf-turnstile-response-enroll';
+              tokenField.name = 'cf-turnstile-response';
+              document.getElementById('hubspot-direct-form')?.appendChild(tokenField);
+            }
+            
+            tokenField.value = token;
+          }
         });
       } catch (error) {
         console.error('Error initializing Turnstile for enrollment form:', error);

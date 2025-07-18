@@ -14,14 +14,30 @@ export function initContactFormTurnstile(): void {
   document.addEventListener('DOMContentLoaded', () => {
     const turnstileContainer = document.getElementById('contact-turnstile') as HTMLElement;
     if (turnstileContainer && window.turnstile) {
-      // Site key from environment or fallback
-      const siteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || '0x4AAAAAABldTXFZ4U3vfXPt';
+      // Site key from environment or use the correct site key
+      const siteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || '0x4AAAAAABlkmjZZRT8r9BHM';
       
       try {
-        window.turnstile.render(turnstileContainer, {
+        const widgetId = window.turnstile.render(turnstileContainer, {
           sitekey: siteKey,
           theme: 'light',
-          size: 'normal'
+          size: 'normal',
+          action: 'microsite-ircs-form-contact',
+          callback: (token: string) => {
+            // Store token in hidden field
+            let tokenField = document.getElementById('cf-turnstile-response-contact') as HTMLInputElement;
+            
+            if (!tokenField) {
+              // Create hidden field if it doesn't exist
+              tokenField = document.createElement('input');
+              tokenField.type = 'hidden';
+              tokenField.id = 'cf-turnstile-response-contact';
+              tokenField.name = 'cf-turnstile-response';
+              document.getElementById('contact-form')?.appendChild(tokenField);
+            }
+            
+            tokenField.value = token;
+          }
         });
       } catch (error) {
         console.error('Error initializing Turnstile for contact form:', error);
