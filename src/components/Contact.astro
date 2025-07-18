@@ -4,8 +4,27 @@ import Section from './ui/Section.astro';
 import Card from './ui/Card.astro';
 import Heading from './ui/Heading.astro';
 import Text from './ui/Text.astro';
-import '../scripts/contact-form-client'; // Import client-side script
 ---
+
+<script>
+  // Import client-side handlers
+  import { loadTurnstileScript } from '../scripts/form-common-turnstile';
+  import { setupContactFormSubmission } from '../scripts/form-contact-client';
+  import { initContactFormTurnstile } from '../scripts/form-contact-turnstile';
+  
+  // Initialize all client-side functionality
+  document.addEventListener('DOMContentLoaded', () => {
+    // Load Turnstile script
+    loadTurnstileScript();
+    
+    // Setup form handlers
+    setupContactFormSubmission();
+    
+    // Initialize Turnstile widget
+    initContactFormTurnstile();
+  });
+</script>
+
 
 <Section background="light" id="contact">
   <div class="max-w-6xl mx-auto">
@@ -146,7 +165,8 @@ import '../scripts/contact-form-client'; // Import client-side script
             ></textarea>
           </div>
           
-          <div class="cf-turnstile mb-4" data-sitekey="0x4AAAAAABldTXFZ4U3vfXPt"></div>
+          <!-- Turnstile container -->
+          <div id="contact-turnstile" class="cf-turnstile mb-4" data-sitekey="0x4AAAAAABldTXFZ4U3vfXPt"></div>
           
           <button 
             type="submit" 

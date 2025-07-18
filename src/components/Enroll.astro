@@ -1,9 +1,29 @@
 ---
+// Enroll component for IRCS Certification
 import Section from './ui/Section.astro';
 import Card from './ui/Card.astro';
 import Heading from './ui/Heading.astro';
 import Text from './ui/Text.astro';
 ---
+
+<script>
+  // Import client-side handlers
+  import { loadTurnstileScript } from '../scripts/form-common-turnstile';
+  import { setupEnrollFormSubmission } from '../scripts/form-enroll-client';
+  import { initEnrollFormTurnstile } from '../scripts/form-enroll-turnstile';
+  
+  // Initialize all client-side functionality
+  document.addEventListener('DOMContentLoaded', () => {
+    // Load Turnstile script
+    loadTurnstileScript();
+    
+    // Setup form handlers
+    setupEnrollFormSubmission();
+    
+    // Initialize Turnstile widget
+    initEnrollFormTurnstile();
+  });
+</script>
 
 <Section background="white" id="enroll">
 	<div class="max-w-4xl mx-auto">
@@ -110,6 +130,9 @@ import Text from './ui/Text.astro';
 					<p id="error-message">An error occurred. Please try again.</p>
 				</div>
 				
+				<!-- Turnstile container -->
+				<div id="enroll-turnstile" class="cf-turnstile-enroll mb-4" data-sitekey="0x4AAAAAABldTXFZ4U3vfXPt"></div>
+				
 				<div class="text-center text-sm text-gray-800 space-y-2">
 					<p>By enrolling, you agree to our <a href="#" class="text-blue-600 hover:text-blue-700">terms of service</a> and <a href="#" class="text-blue-600 hover:text-blue-700">privacy policy</a></p>
 				</div>
@@ -132,14 +155,6 @@ import Text from './ui/Text.astro';
 				</div>
 			</form>
 		</Card>
-
-		<script>
-			// Import the form handler from our TypeScript module
-			import { initializeHubSpotForm } from '../scripts/hubspot-form';
-			
-			// Initialize the form handling
-			initializeHubSpotForm();
-		</script>
 
 	</div>
 </Section>
