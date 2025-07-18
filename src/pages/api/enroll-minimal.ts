@@ -1,7 +1,3 @@
-/**
- * Minimal enrollment API endpoint for debugging
- */
-
 export async function POST({ request }: { request: Request }): Promise<Response> {
   try {
     console.log('=== MINIMAL API ENDPOINT CALLED ===');
