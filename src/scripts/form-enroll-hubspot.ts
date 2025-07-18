@@ -75,11 +75,11 @@ export async function submitToHubSpot(
   pageUri: string
 ): Promise<{ success: boolean; message: string }> {
   try {
-    const portalId = env.HUBSPOT_PORTAL_ID;
-    const formId = env.HUBSPOT_FORM_ID;
+    const portalId = env.ENROLLMENT_HUBSPOT_PORTAL_ID;
+    const formId = env.ENROLLMENT_HUBSPOT_FORM_ID;
     
     if (!portalId || !formId) {
-      throw new Error('HubSpot configuration missing');
+      throw new Error('Enrollment HubSpot configuration missing');
     }
     
     const payload = mapEnrollmentToHubSpot(data, pageUri);

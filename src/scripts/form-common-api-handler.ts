@@ -1,7 +1,13 @@
 /**
  * Common API handler functionality for form processing
  */
-import type { D1Database } from '@cloudflare/workers-types';
+
+// Local D1Database interface (simplified)
+interface D1Database {
+  prepare(sql: string): any;
+  exec(sql: string): any;
+  batch(statements: any[]): any;
+}
 
 /**
  * Environment interface for Cloudflare Workers
@@ -15,10 +21,10 @@ export interface Env {
   // API keys and secrets
   // Contact Form: turnstile_name: microsite-ircs-form-contact, turnstile_id: 0x4AAAAAABlkmjZZRT8r9BHM
   // Enrollment Form: turnstile_name: microsite-ircs-form-enrollment, turnstile_id: 0x4AAAAAABldTXFZ4U3vfXPt
-  TURNSTILE_SITE_KEY: string;
-  TURNSTILE_SECRET_KEY: string;
-  HUBSPOT_PORTAL_ID: string;
-  HUBSPOT_FORM_ID: string;
+  ENROLLMENT_TURNSTILE_SITE_KEY: string;
+  ENROLLMENT_TURNSTILE_SECRET_KEY: string;
+  ENROLLMENT_HUBSPOT_PORTAL_ID: string;
+  ENROLLMENT_HUBSPOT_FORM_ID: string;
   
   // Allow for additional environment variables
   [key: string]: any;

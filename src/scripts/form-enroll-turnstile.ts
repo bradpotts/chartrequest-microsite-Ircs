@@ -14,8 +14,14 @@ export function initEnrollFormTurnstile(): void {
   const initWidget = () => {
     const turnstileContainer = document.querySelector('#enroll-turnstile') as HTMLElement;
     if (turnstileContainer && window.turnstile) {
-      // Site key from environment or fallback - using the correct site key
-      const siteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || '0x4AAAAAABldTXFZ4U3vfXPt';
+      // Site key from environment - use data attribute fallback if env not available
+      const siteKey = (import.meta as any).env?.PUBLIC_ENROLLMENT_TURNSTILE_SITE_KEY || 
+                     turnstileContainer.getAttribute('data-sitekey');
+      
+      if (!siteKey) {
+        console.error('No enrollment Turnstile site key configured');
+        return;
+      }
       
       console.log('Initializing Turnstile for enrollment form with site key:', siteKey);
       
@@ -93,8 +99,13 @@ export function resetEnrollFormTurnstile(): void {
         // Clear the container
         turnstileContainer.innerHTML = '';
         
-        // Re-render the widget
-        const siteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || '0x4AAAAAABldTXFZ4U3vfXPt';
+        // Re-render the widget - get site key from data attribute
+        const siteKey = turnstileContainer.getAttribute('data-sitekey');
+        if (!siteKey) {
+          console.error('No enrollment Turnstile site key available for reset');
+          return;
+        }
+        
         window.turnstile.render(turnstileContainer, {
           sitekey: siteKey,
           theme: 'light',
@@ -125,9 +136,9 @@ export async function validateEnrollFormTurnstile(
     return false;
   }
   
-  const secretKey = env.TURNSTILE_SECRET_KEY;
+  const secretKey = env.ENROLLMENT_TURNSTILE_SECRET_KEY;
   if (!secretKey) {
-    console.error('No Turnstile secret key configured');
+    console.error('No Enrollment Turnstile secret key configured');
     return false;
   }
   
