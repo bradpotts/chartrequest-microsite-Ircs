@@ -6,7 +6,6 @@
   "scripts": {
     "dev": "astro dev --host 0.0.0.0",
     "build": "astro build",
-    "build:cf": "npm ci --production=false && astro build",
     "preview": "astro build && wrangler dev",
     "check": "astro build && tsc && wrangler deploy --dry-run",
     "deploy": "wrangler deploy",
@@ -26,12 +25,12 @@
     "purgecss": "^7.0.2",
     "@playform/compress": "^0.2.0",
     "astro-compressor": "^1.0.0",
-    "sharp": "^0.34.3",
-    "wrangler": "^3.89.0"
+    "sharp": "^0.34.3"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.1.11",
     "autoprefixer": "^10.4.21",
-    "terser": "^5.43.1"
+    "terser": "^5.43.1",
+    "wrangler": "^4.24.4"
   }
 }

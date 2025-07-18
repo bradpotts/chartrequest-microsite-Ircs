@@ -27,19 +27,22 @@ export default defineConfig({
     sitemap(),
     robotsTxt(),
     
-    // CSS Optimization (reduced for build stability)
+    // CSS Optimization
     purgecss({
       // Remove unused CSS
       content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
-      safelist: ['html', 'body'] // Keep essential selectors
     }),
     
-    // Asset Compression & Optimization (simplified)
+    // Asset Compression & Optimization
     playformCompress({
       CSS: true,
       HTML: true,
+      Image: true,
       JavaScript: true,
+      JSON: true,
+      SVG: true,
     }),
+    compressor(),
   ],
   
   // Deployment
