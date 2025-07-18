@@ -66,6 +66,11 @@ export async function verifyTurnstileToken(
   ip: string, 
   secret: string
 ): Promise<boolean> {
+  console.log('Verifying Turnstile token...');
+  console.log('Token:', token.substring(0, 20) + '...');
+  console.log('IP:', ip);
+  console.log('Secret key start:', secret.substring(0, 10) + '...');
+  
   try {
     const response = await fetch(TURNSTILE_VERIFY_URL, {
       method: 'POST',
@@ -79,13 +84,17 @@ export async function verifyTurnstileToken(
       }),
     });
 
+    console.log('Turnstile API response status:', response.status);
     const data = await response.json() as TurnstileVerifyResponse;
+    console.log('Turnstile API response data:', data);
     
     if (!data.success) {
       console.error('Turnstile verification failed:', data.error);
+      console.error('Error codes:', data.error);
       return false;
     }
     
+    console.log('Turnstile verification successful');
     return true;
   } catch (error) {
     console.error('Error verifying Turnstile token:', error);

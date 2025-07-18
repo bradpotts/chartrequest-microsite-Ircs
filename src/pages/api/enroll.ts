@@ -15,6 +15,11 @@ export async function POST({ request, env, clientAddress }: AstroAPIContext): Pr
     // Get client IP for Turnstile verification
     const ip = getClientIp(request, clientAddress);
     
+    console.log('=== ENROLLMENT FORM SUBMISSION DEBUG ===');
+    console.log('Request URL:', request.url);
+    console.log('Client IP:', ip);
+    console.log('Form data keys:', Array.from(formData.keys()));
+    
     // Extract form fields
     const enrollmentData = {
       fullName: formData.get("fullName")?.toString() || "",
@@ -26,19 +31,30 @@ export async function POST({ request, env, clientAddress }: AstroAPIContext): Pr
       comments: formData.get("comments")?.toString() || ""
     };
     
+    console.log('Enrollment data:', enrollmentData);
+    
     // Validate form data
     const validation = validateEnrollmentData(enrollmentData);
     if (!validation.valid) {
+      console.log('Form validation failed:', validation.message);
       return createErrorResponse(validation.message || "Invalid form data", 400);
     }
     
+    console.log('Form validation passed');
+    
     // Validate Turnstile token
     const turnstileToken = formData.get("cf-turnstile-response")?.toString();
+    console.log('Turnstile token received:', turnstileToken ? 'YES' : 'NO');
+    console.log('Turnstile token length:', turnstileToken?.length || 0);
+    
     const isTokenValid = await validateEnrollFormTurnstile(turnstileToken, ip, env);
     
     if (!isTokenValid) {
+      console.log('Turnstile validation failed');
       return createErrorResponse("Security check failed. Please try again.", 400);
     }
+    
+    console.log('Turnstile validation passed');
     
     // Get page URI for HubSpot tracking
     const pageUri = request.headers.get('Referer') || 'https://informationreleasecertification.com/';
