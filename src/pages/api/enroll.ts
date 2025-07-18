@@ -1,6 +1,7 @@
 /**
- * Enrollment API endpoint - Step 1: Add form data parsing
+ * Enrollment API endpoint - Step 2: Add validation and proper interfaces
  */
+import type { EnrollmentFormData } from '../../scripts/form-enroll-database';
 
 export async function POST({ request }: { request: Request }): Promise<Response> {
   try {
@@ -29,9 +30,30 @@ export async function POST({ request }: { request: Request }): Promise<Response>
     console.log('Motivation:', motivation);
     console.log('Turnstile Token Present:', cfTurnstileResponse ? 'Yes' : 'No');
     
+    // Basic validation
+    const errors: string[] = [];
+    if (!fullName.trim()) errors.push('Full name is required');
+    if (!email.trim()) errors.push('Email is required');
+    if (!email.includes('@')) errors.push('Valid email is required');
+    if (!cfTurnstileResponse) errors.push('Security verification is required');
+    
+    if (errors.length > 0) {
+      console.log('Validation errors:', errors);
+      return new Response(JSON.stringify({
+        success: false,
+        message: "Validation failed",
+        errors: errors
+      }), {
+        status: 400,
+        headers: { 'Content-Type': 'application/json' }
+      });
+    }
+    
+    console.log('Validation passed');
+    
     return new Response(JSON.stringify({
       success: true,
-      message: "All form data extraction works",
+      message: "All form data extraction and validation works",
       data: { 
         fullName, 
         email, 
