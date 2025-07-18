@@ -19,7 +19,7 @@ import robotsTxt from 'astro-robots-txt';
 export default defineConfig({
   // Site Configuration
   site: "https://informationreleasecertification.com",
-  output: 'static',
+  output: 'server',
 
   // Integrations
   integrations: [
